@@ -135,6 +135,9 @@ function openVideoPopup(centerIcon) {
       const profileImage = document.getElementById("profileImage");
       profileImage.src = centerIcon.dataset.personImg;
       profileImage.classList.add("show");
+      setTimeout(() => {
+        lumaIcon.classList.add("show");
+      }, 300);
     }, 100);
   }, 1200);
 }
