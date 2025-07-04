@@ -621,6 +621,15 @@ body[data-scroll="16"] .profile-image {
   transition: 1.5s;
 }
 
+body[data-scroll="17"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
 body[data-scroll="3"] .luma-icon {
   opacity: 0;
   margin-top: -180px;
