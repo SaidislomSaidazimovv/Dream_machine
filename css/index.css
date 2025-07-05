@@ -630,6 +630,78 @@ body[data-scroll="17"] .profile-image {
   transition: 1.5s;
 }
 
+body[data-scroll="18"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="19"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="20"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="21"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="22"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="23"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="24"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="25"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
 body[data-scroll="3"] .luma-icon {
   opacity: 0;
   margin-top: -180px;

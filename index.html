@@ -174,8 +174,8 @@
       id="seventhVideoContainer"
       style="
         position: absolute;
-        width: 100px;
-        height: 205px;
+        width: 80px;
+        height: 135px;
         top: 45%;
         left: 64%;
         transform: translate(-50%, -50%);
@@ -189,6 +189,31 @@
     >
       <video
         id="seventhVideo"
+        muted
+        loop
+        style="width: 100%; height: 100%; object-fit: cover"
+      ></video>
+    </div>
+
+    <div
+      id="eightVideoContainer"
+      style="
+        position: absolute;
+        width: 80px;
+        height: 105px;
+        top: 53%;
+        left: 38%;
+        transform: translate(-50%, -50%);
+        transition: transform 1.5s ease, opacity 1.5s ease;
+        z-index: -8;
+        display: none;
+        border-radius: 7px;
+        pointer-events: none;
+        overflow: hidden;
+      "
+    >
+      <video
+        id="eightVideo"
         muted
         loop
         style="width: 100%; height: 100%; object-fit: cover"
