@@ -132,6 +132,24 @@ const eighthBackgroundVideos = {
   "#f04b4b": "../img/vd/eight_red.mp4",
 };
 
+const thumb = document.getElementById("scrollbarThumb");
+const maxStep = 36;
+
+function updateThumb(scrollStep) {
+  const trackHeight = window.innerHeight;
+  const thumbHeight = 20;
+  const maxTop = trackHeight - thumbHeight;
+  const stepHeight = maxTop / maxStep;
+
+  const top = Math.min(scrollStep * stepHeight, maxTop);
+  thumb.style.top = `${top}px`;
+}
+
+const originalWheelHandler = window.onwheel || (() => {});
+window.addEventListener("wheel", (e) => {
+  requestAnimationFrame(() => updateThumb(scrollStep));
+});
+
 let currentShuffledIcons = [];
 let currentCenterIndex = 2;
 
@@ -779,6 +797,262 @@ function setupIconClickSwap() {
         scaleSeventhVideoExtra25();
         scaleEighthVideoExtra25();
       }
+
+      if (scrollStep === 26) {
+        const newBgColor = clickedIconData.bgColor.toLowerCase();
+
+        const newBgVideo = backgroundVideos[newBgColor] || "";
+        const newSideVideo = newSideVideos[newBgColor] || "";
+        const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+        const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+        const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+        const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+        const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+        const newEighthVideo = eighthBackgroundVideos?.[newBgColor] || "";
+
+        if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+        if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+        if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+        if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+        if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+        if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+        if (newSeventhVideo)
+          updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+        if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+        scaleEighthVideoExtra25();
+      }
+
+      if (scrollStep === 27) {
+        const newBgColor = clickedIconData.bgColor.toLowerCase();
+
+        const newBgVideo = backgroundVideos[newBgColor] || "";
+        const newSideVideo = newSideVideos[newBgColor] || "";
+        const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+        const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+        const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+        const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+        const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+        const newEighthVideo = eighthBackgroundVideos?.[newBgColor] || "";
+
+        if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+        if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+        if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+        if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+        if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+        if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+        if (newSeventhVideo)
+          updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+        if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+        scaleEighthVideoExtra25();
+      }
+
+      if (scrollStep === 28) {
+        const newBgColor = clickedIconData.bgColor.toLowerCase();
+
+        const newBgVideo = backgroundVideos[newBgColor] || "";
+        const newSideVideo = newSideVideos[newBgColor] || "";
+        const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+        const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+        const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+        const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+        const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+        const newEighthVideo = eighthBackgroundVideos?.[newBgColor] || "";
+
+        if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+        if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+        if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+        if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+        if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+        if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+        if (newSeventhVideo)
+          updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+        if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+        scaleEighthVideoExtra25();
+      }
+
+      if (scrollStep === 29) {
+        const newBgColor = clickedIconData.bgColor.toLowerCase();
+
+        const newBgVideo = backgroundVideos[newBgColor] || "";
+        const newSideVideo = newSideVideos[newBgColor] || "";
+        const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+        const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+        const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+        const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+        const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+        const newEighthVideo = eighthBackgroundVideos?.[newBgColor] || "";
+
+        if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+        if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+        if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+        if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+        if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+        if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+        if (newSeventhVideo)
+          updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+        if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+        scaleEighthVideoExtra25();
+      }
+
+      if (scrollStep === 30) {
+        const newBgColor = clickedIconData.bgColor.toLowerCase();
+
+        const newBgVideo = backgroundVideos[newBgColor] || "";
+        const newSideVideo = newSideVideos[newBgColor] || "";
+        const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+        const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+        const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+        const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+        const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+        const newEighthVideo = eighthBackgroundVideos?.[newBgColor] || "";
+
+        if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+        if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+        if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+        if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+        if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+        if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+        if (newSeventhVideo)
+          updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+        if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+        scaleEighthVideoExtra30();
+        animateIconsToTop30();
+      }
+
+      if (scrollStep === 31) {
+        const newBgColor = clickedIconData.bgColor.toLowerCase();
+
+        const newBgVideo = backgroundVideos[newBgColor] || "";
+        const newSideVideo = newSideVideos[newBgColor] || "";
+        const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+        const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+        const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+        const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+        const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+        const newEighthVideo = eighthBackgroundVideos?.[newBgColor] || "";
+
+        if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+        if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+        if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+        if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+        if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+        if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+        if (newSeventhVideo)
+          updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+        if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+        scaleEighthVideoExtra31();
+        animateIconsToTop30();
+      }
+
+      if (scrollStep === 32) {
+        const newBgColor = clickedIconData.bgColor.toLowerCase();
+
+        const newBgVideo = backgroundVideos[newBgColor] || "";
+        const newSideVideo = newSideVideos[newBgColor] || "";
+        const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+        const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+        const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+        const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+        const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+        const newEighthVideo = eighthBackgroundVideos?.[newBgColor] || "";
+
+        if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+        if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+        if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+        if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+        if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+        if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+        if (newSeventhVideo)
+          updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+        if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+        scaleEighthVideoExtra32();
+        animateIconsToTop30();
+      }
+
+      if (scrollStep === 33) {
+        const newBgColor = clickedIconData.bgColor.toLowerCase();
+
+        const newBgVideo = backgroundVideos[newBgColor] || "";
+        const newSideVideo = newSideVideos[newBgColor] || "";
+        const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+        const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+        const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+        const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+        const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+        const newEighthVideo = eighthBackgroundVideos?.[newBgColor] || "";
+
+        if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+        if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+        if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+        if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+        if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+        if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+        if (newSeventhVideo)
+          updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+        if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+        scaleEighthVideoExtra33();
+        animateIconsToTop30();
+      }
+
+      if (scrollStep === 34) {
+        const newBgColor = clickedIconData.bgColor.toLowerCase();
+
+        const newBgVideo = backgroundVideos[newBgColor] || "";
+        const newSideVideo = newSideVideos[newBgColor] || "";
+        const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+        const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+        const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+        const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+        const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+        const newEighthVideo = eighthBackgroundVideos?.[newBgColor] || "";
+
+        if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+        if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+        if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+        if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+        if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+        if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+        if (newSeventhVideo)
+          updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+        if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+        scaleEighthVideoExtra34();
+        animateIconsToTop30();
+      }
+
+      if (scrollStep === 35) {
+        const newBgColor = clickedIconData.bgColor.toLowerCase();
+
+        const newBgVideo = backgroundVideos[newBgColor] || "";
+        const newSideVideo = newSideVideos[newBgColor] || "";
+        const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+        const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+        const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+        const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+        const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+        const newEighthVideo = eighthBackgroundVideos?.[newBgColor] || "";
+
+        if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+        if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+        if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+        if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+        if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+        if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+        if (newSeventhVideo)
+          updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+        if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+        scaleEighthVideoExtra35();
+        animateIconsToTop30();
+      }
     });
   });
 }
@@ -990,7 +1264,7 @@ window.addEventListener("wheel", (e) => {
   const prev = scrollStep;
 
   if (e.deltaY > 0) {
-    scrollStep = Math.min(scrollStep + 1, 25);
+    scrollStep = Math.min(scrollStep + 1, 36);
   } else if (e.deltaY < 0) {
     scrollStep = Math.max(scrollStep - 1, 0);
   }
@@ -1000,6 +1274,22 @@ window.addEventListener("wheel", (e) => {
     document.body.classList.add("scrolled");
   } else {
     document.body.classList.remove("scrolled");
+  }
+
+  if (scrollStep < 34) {
+    hideLeftText34();
+  }
+
+  if (scrollStep === 30) {
+    hideHeaderButtonsOnScroll30();
+  }
+
+  if (scrollStep === 29) {
+    showCenterTypingText18();
+    showCenterDescriptionText18();
+    resetIconsToCenterFrom30();
+    resetEighthVideoFrom30();
+    resetHeaderButtonsFromScroll30();
   }
 
   if (scrollStep === 18) {
@@ -1592,8 +1882,573 @@ window.addEventListener("wheel", (e) => {
     scaleEighthVideoExtra25();
   }
 
+  if (scrollStep === 26) {
+    const centerIconData = currentShuffledIcons[currentCenterIndex];
+    const newBgColor = centerIconData.bgColor.toLowerCase();
+
+    const newBgVideo = backgroundVideos[newBgColor] || "";
+    const newSideVideo = newSideVideos[newBgColor] || "";
+    const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+    const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+    const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+    const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+    const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+    const newEighthVideo = eighthBackgroundVideos[newBgColor] || "";
+
+    if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+    if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+    if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+    if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+    if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+    if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+    if (newSeventhVideo) updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+    if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+    scaleEighthVideoExtra25();
+  }
+
+  if (scrollStep === 27) {
+    const centerIconData = currentShuffledIcons[currentCenterIndex];
+    const newBgColor = centerIconData.bgColor.toLowerCase();
+
+    const newBgVideo = backgroundVideos[newBgColor] || "";
+    const newSideVideo = newSideVideos[newBgColor] || "";
+    const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+    const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+    const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+    const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+    const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+    const newEighthVideo = eighthBackgroundVideos[newBgColor] || "";
+
+    if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+    if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+    if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+    if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+    if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+    if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+    if (newSeventhVideo) updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+    if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+    scaleEighthVideoExtra25();
+  }
+
+  if (scrollStep === 28) {
+    const centerIconData = currentShuffledIcons[currentCenterIndex];
+    const newBgColor = centerIconData.bgColor.toLowerCase();
+
+    const newBgVideo = backgroundVideos[newBgColor] || "";
+    const newSideVideo = newSideVideos[newBgColor] || "";
+    const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+    const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+    const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+    const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+    const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+    const newEighthVideo = eighthBackgroundVideos[newBgColor] || "";
+
+    if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+    if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+    if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+    if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+    if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+    if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+    if (newSeventhVideo) updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+    if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+    scaleEighthVideoExtra25();
+  }
+
+  if (scrollStep === 29) {
+    const centerIconData = currentShuffledIcons[currentCenterIndex];
+    const newBgColor = centerIconData.bgColor.toLowerCase();
+
+    const newBgVideo = backgroundVideos[newBgColor] || "";
+    const newSideVideo = newSideVideos[newBgColor] || "";
+    const newThirdVideo = thirdBackgroundVideos[newBgColor] || "";
+    const newFourthVideo = fourthBackgroundVideos[newBgColor] || "";
+    const newFifthVideo = fifthBackgroundVideos[newBgColor] || "";
+    const newSixthVideo = sixthBackgroundVideos[newBgColor] || "";
+    const newSeventhVideo = seventhBackgroundVideos[newBgColor] || "";
+    const newEighthVideo = eighthBackgroundVideos[newBgColor] || "";
+
+    if (newBgVideo) replaceBackgroundVideoSrcOnly(newBgVideo);
+    if (newSideVideo) replaceSideVideoSrcOnly(newSideVideo);
+    if (newThirdVideo) replaceThirdVideoSrcOnly(newThirdVideo);
+    if (newFourthVideo) replaceFourthVideoSrcOnly(newFourthVideo);
+    if (newFifthVideo) updateFifthBackgroundVideoSrcOnly(newFifthVideo);
+    if (newSixthVideo) updateSixthBackgroundVideoSrcOnly(newSixthVideo);
+    if (newSeventhVideo) updateSeventhBackgroundVideoSrcOnly(newSeventhVideo);
+    if (newEighthVideo) updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+
+    scaleEighthVideoExtra25();
+  }
+
+  if (scrollStep === 30) {
+    hideCenterTypingText18();
+    hideCenterDescriptionText18();
+    animateIconsToTop30();
+    scaleEighthVideoExtra30();
+  }
+
+  if (scrollStep === 31) {
+    hideCenterTypingText18();
+    hideCenterDescriptionText18();
+    animateIconsToTop30();
+    scaleEighthVideoExtra31();
+  }
+
+  if (scrollStep === 32) {
+    hideCenterTypingText18();
+    hideCenterDescriptionText18();
+    animateIconsToTop30();
+    scaleEighthVideoExtra32();
+  }
+
+  if (scrollStep === 33) {
+    hideCenterTypingText18();
+    hideCenterDescriptionText18();
+    animateIconsToTop30();
+    scaleEighthVideoExtra33();
+  }
+
+  if (scrollStep === 34) {
+    hideCenterTypingText18();
+    hideCenterDescriptionText18();
+    animateIconsToTop30();
+    scaleEighthVideoExtra34();
+    showLeftTypingText34();
+    showLeftDescriptionText34();
+  } else if (scrollStep < 34) {
+    resetEighthCircleFrom34();
+  }
+
+  if (scrollStep === 35) {
+    hideCenterTypingText18();
+    hideCenterDescriptionText18();
+    animateIconsToTop30();
+    scaleEighthVideoExtra35();
+  }
+
+  if (scrollStep === 36) {
+    hideCenterTypingText18();
+    hideCenterDescriptionText18();
+    animateIconsToTop30();
+    scaleEighthVideoExtra36();
+  }
+
   previousScroll = scrollStep;
 });
+
+function scaleEighthVideoExtra36() {
+  const container = document.getElementById("eightVideoContainer");
+
+  if (!container) {
+    console.warn("eightVideoContainer topilmadi");
+    return;
+  }
+
+  container.style.display = "block";
+  container.getBoundingClientRect();
+
+  requestAnimationFrame(() => {
+    container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+    container.style.transform = "translate(555%, -60%) scale(5.4)";
+    container.style.opacity = "1";
+  });
+
+  const existingCircle = document.querySelector(".video-circle-overlay");
+  if (existingCircle) existingCircle.remove();
+
+  const circle = document.createElement("div");
+  circle.className = "video-circle-overlay";
+  circle.style.position = "absolute";
+  circle.style.top = "60%";
+  circle.style.left = "50%";
+  circle.style.transform = "translate(-50%, -50%) scale(0)";
+  circle.style.width = "50px";
+  circle.style.height = "11px";
+  circle.style.borderRadius = "30px";
+
+  circle.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+  circle.style.border = "none";
+  circle.style.boxShadow = "none";
+
+  circle.style.transition = "transform 0.8s ease, opacity 0.8s ease";
+  circle.style.zIndex = "2";
+
+  container.appendChild(circle);
+
+  requestAnimationFrame(() => {
+    circle.style.transform = "translate(-50%, -50%) scale(1)";
+  });
+}
+
+function scaleEighthVideoExtra35() {
+  const container = document.getElementById("eightVideoContainer");
+
+  if (!container) {
+    console.warn("eightVideoContainer topilmadi");
+    return;
+  }
+
+  container.style.display = "block";
+
+  container.getBoundingClientRect();
+
+  requestAnimationFrame(() => {
+    container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+    container.style.transform = "translate(555%, -60%) scale(5.4)";
+    container.style.opacity = "1";
+  });
+
+  const existingCircle = document.querySelector(".video-circle-overlay");
+  if (existingCircle) existingCircle.remove();
+
+  const circle = document.createElement("div");
+  circle.className = "video-circle-overlay";
+  circle.style.position = "absolute";
+  circle.style.top = "60%";
+  circle.style.left = "50%";
+  circle.style.transform = "translate(-50%, -50%) scale(0)";
+  circle.style.width = "8px";
+  circle.style.height = "9px";
+  circle.style.borderRadius = "50%";
+  circle.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+  circle.style.transition = "transform 0.8s ease, opacity 0.8s ease";
+  circle.className = "video-circle-overlay";
+  circle.style.zIndex = "2";
+  circle.style.transition = "transform 0.8s ease";
+
+  container.appendChild(circle);
+
+  requestAnimationFrame(() => {
+    circle.style.transform = "translate(-50%, -50%) scale(1)";
+  });
+}
+
+function resetEighthVideoFrom35() {
+  const container = document.getElementById("eightVideoContainer");
+  if (!container) return;
+
+  container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+  container.style.transform = "translate(10%, -50%) scale(0.3)";
+  container.style.opacity = "0";
+}
+
+function showLeftTypingText34() {
+  const existing = document.querySelector(".left-typing-text-34");
+  if (existing) existing.remove();
+
+  const container = document.createElement("div");
+  container.className = "left-typing-text-34";
+  container.style.position = "absolute";
+  container.style.top = "30%";
+  container.style.left = "13%";
+  container.style.color = "black";
+  container.style.fontSize = "48px";
+  container.style.fontWeight = "500";
+  container.style.fontFamily = "Arial, sans-serif";
+  container.style.whiteSpace = "pre-wrap";
+  container.style.zIndex = "999";
+
+  document.body.appendChild(container);
+
+  const part1 = "No prompt\nengineering needed,\njust";
+  const part2 = "ask";
+
+  let index = 0;
+
+  function typeText() {
+    if (index < part1.length) {
+      container.innerText += part1.charAt(index);
+      index++;
+      setTimeout(typeText, 60);
+    } else {
+      const span = document.createElement("span");
+      span.textContent = part2;
+      span.style.fontFamily = "'Dancing Script', cursive";
+      span.style.marginLeft = "20px";
+      span.style.fontWeight = "600";
+      container.appendChild(span);
+    }
+  }
+
+  typeText();
+}
+
+function hideLeftText34() {
+  document.querySelector(".left-typing-text-34")?.remove();
+  document.querySelector(".left-description-text-34")?.remove();
+}
+
+function showLeftDescriptionText34() {
+  const existing = document.querySelector(".left-description-text-34");
+  if (existing) existing.remove();
+
+  const desc = document.createElement("div");
+  desc.className = "left-description-text-34";
+  desc.style.position = "absolute";
+  desc.style.top = "58%";
+  desc.style.left = "13%";
+  desc.style.color = "gray";
+  desc.style.fontSize = "18px";
+  desc.style.fontWeight = "400";
+  desc.style.fontFamily = "Arial, sans-serif";
+  desc.style.lineHeight = "1.6";
+  desc.style.opacity = "0";
+  desc.style.transition = "opacity 1s ease";
+  desc.style.zIndex = "999";
+
+  desc.innerHTML = `
+    Be as simple or as specific. Talk in your<br>
+    own way to generate, edit and move<br>
+    through your explorations fluently.<br>
+  `;
+
+  document.body.appendChild(desc);
+
+  requestAnimationFrame(() => {
+    desc.style.opacity = "1";
+  });
+}
+
+function scaleEighthVideoExtra34() {
+  const container = document.getElementById("eightVideoContainer");
+
+  if (!container) {
+    console.warn("eightVideoContainer topilmadi");
+    return;
+  }
+
+  container.style.display = "block";
+
+  container.getBoundingClientRect();
+
+  requestAnimationFrame(() => {
+    container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+    container.style.transform = "translate(555%, -60%) scale(5.4)";
+    container.style.opacity = "1";
+  });
+
+  const existingCircle = document.querySelector(".video-circle-overlay");
+  if (existingCircle) existingCircle.remove();
+
+  const circle = document.createElement("div");
+  circle.className = "video-circle-overlay";
+  circle.style.position = "absolute";
+  circle.style.top = "60%";
+  circle.style.left = "50%";
+  circle.style.transform = "translate(-50%, -50%) scale(0)";
+  circle.style.width = "8px";
+  circle.style.height = "9px";
+  circle.style.borderRadius = "50%";
+  circle.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+  circle.style.border = "1px solid rgba(255, 255, 255, 0.05)";
+  circle.style.boxShadow = `
+  0 0 20px 10px rgba(255, 255, 255, 0.3),
+  0 0 30px 15px rgba(255, 255, 255, 0.2),
+  inset 0 0 10px rgba(255, 255, 255, 0.1)
+`;
+  circle.style.transition = "transform 0.8s ease, opacity 0.8s ease";
+  circle.className = "video-circle-overlay";
+  circle.style.zIndex = "2";
+  circle.style.transition = "transform 0.8s ease";
+
+  container.appendChild(circle);
+
+  requestAnimationFrame(() => {
+    circle.style.transform = "translate(-50%, -50%) scale(1)";
+  });
+}
+
+function resetEighthVideoFrom34() {
+  const container = document.getElementById("eightVideoContainer");
+  if (!container) return;
+
+  container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+  container.style.transform = "translate(10%, -50%) scale(0.3)";
+  container.style.opacity = "0";
+}
+
+function resetEighthCircleFrom34() {
+  const container = document.getElementById("eightVideoContainer");
+  if (!container) return;
+
+  const circle = container.querySelector(".video-circle-overlay");
+  if (circle) {
+    circle.style.transform = "translate(-50%, -50%) scale(0)";
+    setTimeout(() => {
+      circle.remove();
+    }, 500);
+  }
+}
+
+function scaleEighthVideoExtra33() {
+  const container = document.getElementById("eightVideoContainer");
+
+  if (!container) {
+    console.warn("eightVideoContainer topilmadi");
+    return;
+  }
+
+  container.style.display = "block";
+
+  container.getBoundingClientRect();
+
+  requestAnimationFrame(() => {
+    container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+    container.style.transform = "translate(525%, -60%) scale(5.4)";
+    container.style.opacity = "1";
+  });
+}
+
+function resetEighthVideoFrom33() {
+  const container = document.getElementById("eightVideoContainer");
+  if (!container) return;
+
+  container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+  container.style.transform = "translate(10%, -50%) scale(0.3)";
+  container.style.opacity = "0";
+}
+
+function scaleEighthVideoExtra32() {
+  const container = document.getElementById("eightVideoContainer");
+
+  if (!container) {
+    console.warn("eightVideoContainer topilmadi");
+    return;
+  }
+
+  container.style.display = "block";
+
+  container.getBoundingClientRect();
+
+  requestAnimationFrame(() => {
+    container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+    container.style.transform = "translate(325%, -60%) scale(4.9)";
+    container.style.opacity = "1";
+  });
+}
+
+function resetEighthVideoFrom32() {
+  const container = document.getElementById("eightVideoContainer");
+  if (!container) return;
+
+  container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+  container.style.transform = "translate(10%, -50%) scale(0.3)";
+  container.style.opacity = "0";
+}
+
+function scaleEighthVideoExtra31() {
+  const container = document.getElementById("eightVideoContainer");
+
+  if (!container) {
+    console.warn("eightVideoContainer topilmadi");
+    return;
+  }
+
+  container.style.display = "block";
+
+  container.getBoundingClientRect();
+
+  requestAnimationFrame(() => {
+    container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+    container.style.transform = "translate(-55%, -60%) scale(4.3)";
+    container.style.opacity = "1";
+  });
+}
+
+function resetEighthVideoFrom31() {
+  const container = document.getElementById("eightVideoContainer");
+  if (!container) return;
+
+  container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+  container.style.transform = "translate(10%, -50%) scale(0.3)";
+  container.style.opacity = "0";
+}
+
+function hideHeaderButtonsOnScroll30() {
+  const buttons = document.querySelectorAll(".btnhd");
+  buttons.forEach((btn) => {
+    btn.style.transition = "opacity 0.5s ease";
+    btn.style.opacity = "0";
+
+    btn.style.pointerEvents = "none";
+    btn.style.visibility = "hidden";
+  });
+}
+
+function resetHeaderButtonsFromScroll30() {
+  const buttons = document.querySelectorAll(".btnhd");
+  buttons.forEach((btn) => {
+    btn.style.opacity = "1";
+    btn.style.pointerEvents = "auto";
+    btn.style.visibility = "visible";
+  });
+}
+
+function hideCenterTypingText18() {
+  const container = document.querySelector(".center-typing-text-18");
+  if (container) {
+    container.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+    container.style.opacity = "0";
+
+    setTimeout(() => {
+      container.remove();
+    }, 600);
+  }
+}
+
+function animateIconsToTop30() {
+  const iconRow = document.getElementById("iconRow");
+  if (!iconRow) return;
+
+  iconRow.style.position = "absolute";
+  iconRow.style.display = "flex";
+  iconRow.style.justifyContent = "center";
+  iconRow.style.alignItems = "center";
+  iconRow.style.left = "50%";
+  iconRow.style.right = "50%";
+  iconRow.style.transition = "top 1s ease, transform 1s ease";
+  iconRow.style.top = "3%";
+}
+
+function resetIconsToCenterFrom30() {
+  const iconRow = document.getElementById("iconRow");
+  if (!iconRow) return;
+
+  iconRow.style.position = "relative";
+  iconRow.style.left = "unset";
+  iconRow.style.right = "unset";
+  iconRow.style.transform = "none";
+}
+
+function scaleEighthVideoExtra30() {
+  const container = document.getElementById("eightVideoContainer");
+
+  if (!container) {
+    console.warn("eightVideoContainer topilmadi");
+    return;
+  }
+
+  container.style.display = "block";
+
+  container.getBoundingClientRect();
+
+  requestAnimationFrame(() => {
+    container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+    container.style.transform = "translate(-325%, -60%) scale(3.9)";
+    container.style.opacity = "0.8";
+  });
+}
+
+function resetEighthVideoFrom30() {
+  const container = document.getElementById("eightVideoContainer");
+  if (!container) return;
+
+  container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+  container.style.transform = "translate(10%, -50%) scale(0.3)";
+  container.style.opacity = "0";
+}
 
 function scaleSeventhVideoExtra25() {
   const container = document.getElementById("seventhVideoContainer");
