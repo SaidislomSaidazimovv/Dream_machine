@@ -831,6 +831,51 @@ body[data-scroll="36"] .profile-image {
   transition: 1.5s;
 }
 
+body[data-scroll="37"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="38"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="39"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="40"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="41"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
 .icon-header-text,
 .icon-description-text {
   transition: opacity 0.8s ease, transform 0.8s ease;
