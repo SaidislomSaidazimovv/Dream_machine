@@ -133,7 +133,7 @@ const eighthBackgroundVideos = {
 };
 
 const thumb = document.getElementById("scrollbarThumb");
-const maxStep = 41;
+const maxStep = 42;
 
 function updateThumb(scrollStep) {
   const trackHeight = window.innerHeight;
@@ -1429,7 +1429,7 @@ window.addEventListener("wheel", (e) => {
   const prev = scrollStep;
 
   if (e.deltaY > 0) {
-    scrollStep = Math.min(scrollStep + 1, 41);
+    scrollStep = Math.min(scrollStep + 1, 42);
   } else if (e.deltaY < 0) {
     scrollStep = Math.max(scrollStep - 1, 0);
   }
@@ -1440,6 +1440,8 @@ window.addEventListener("wheel", (e) => {
   } else {
     document.body.classList.remove("scrolled");
   }
+
+  handleScrollStep(scrollStep);
 
   if (scrollStep < 34) {
     hideLeftText34();
@@ -2225,8 +2227,56 @@ window.addEventListener("wheel", (e) => {
     animateIconsToTop30(scrollStep, true);
   }
 
+  if (scrollStep === 42) {
+    animateIconsToTop30(scrollStep, true);
+
+    zoomOutBackgroundVideo();
+  }
+
   previousScroll = scrollStep;
 });
+
+const iconImageMap = {
+  "#32cd32": ["../img/green_1.jpg", "../img/green_2.jpg", "../img/green_3.jpg"],
+  "#3939dd": ["../img/blue_1.jpg", "../img/blue_2.jpg", "../img/blue_3.jpg"],
+  "#ffffff": ["../img/gray_1.jpg", "../img/gray_2.jpg", "../img/gray_3.jpg"],
+  "#ffa500": [
+    "../img/orange_1.jpg",
+    "../img/orange_2.jpg",
+    "../img/orange_3.jpg",
+  ],
+  "#f04b4b": ["../img/red_1.jpg", "../img/red_2.jpg", "../img/red_3.jpg"],
+};
+
+let lastScrollStep = null;
+
+function zoomOutBackgroundVideo() {
+  const video = document.getElementById("eightVideo");
+  if (!video) return;
+
+  video.style.transform = "translate(0%, 0%) scale(0.1)";
+  video.style.borderRadius = "7px";
+  video.style.opacity = "0";
+}
+
+function resetBackgroundVideo() {
+  const video = document.getElementById("eightVideo");
+  if (!video) return;
+
+  video.style.transform = "translate(0%, 0%) scale(1)";
+  video.style.borderRadius = "7px";
+  video.style.opacity = "1";
+}
+
+function handleScrollStep(scrollStep) {
+  if (scrollStep === 42 && lastScrollStep !== 42) {
+    zoomOutBackgroundVideo();
+  } else if (scrollStep < 42 && lastScrollStep === 42) {
+    resetBackgroundVideo();
+  }
+
+  lastScrollStep = scrollStep;
+}
 
 function scaleEighthVideoExtra38() {
   const container = document.getElementById("eightVideoContainer");

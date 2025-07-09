@@ -876,6 +876,27 @@ body[data-scroll="41"] .profile-image {
   transition: 1.5s;
 }
 
+body[data-scroll="42"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+#eightVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s ease, opacity 1s ease;
+  z-index: -1; /* boshqa elementlar ustida bo'lmasin */
+}
+
+
 .icon-header-text,
 .icon-description-text {
   transition: opacity 0.8s ease, transform 0.8s ease;
