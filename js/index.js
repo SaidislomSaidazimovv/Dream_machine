@@ -133,7 +133,7 @@ const eighthBackgroundVideos = {
 };
 
 const thumb = document.getElementById("scrollbarThumb");
-const maxStep = 42;
+const maxStep = 53;
 
 function updateThumb(scrollStep) {
   const trackHeight = window.innerHeight;
@@ -300,18 +300,10 @@ function createFourIcons() {
   setupIconClickSwap();
 }
 
-const promptTexts = {
-  "#32cd32": "Can I see this musician in Iceland",
-  "#3939dd": "Can I have the flowers in terrarium",
-  "#ffffff": "Can I have the model by the water",
-  "#ffa500": "Can I have the view for kitchen",
-  "#f04b4b": "Can I have this desert be raining",
-};
-
 function setupIconClickSwap() {
   const iconRow = document.getElementById("iconRow");
   const icons = iconRow.querySelectorAll(
-    ".side-icon, .center-replacement-icon"
+    "#iconRow .side-icon, #iconRow .center-replacement-icon"
   );
 
   icons.forEach((icon, clickedIndex) => {
@@ -1218,6 +1210,29 @@ function setupIconClickSwap() {
         scaleEighthVideoExtra38();
         animateIconsToTop30();
       }
+
+      const newColor = icon.dataset.bgColor?.toLowerCase();
+      if (!newColor) return;
+
+      if (isStep42Active) {
+        last42ImageBgColor = newColor;
+        const container = document.getElementById("imageAroundCircleContainer");
+
+        if (container) {
+          setTimeout(() => {
+            showThreeImagesAroundCircle(newColor);
+          }, 300);
+        } else {
+          showThreeImagesAroundCircle(newColor);
+        }
+
+        updatePromptText(newColor);
+
+        if (isStep48Active) {
+          handleScrollStep48();
+        }
+        last42ImageBgColor = newColor;
+      }
     });
   });
 }
@@ -1429,7 +1444,7 @@ window.addEventListener("wheel", (e) => {
   const prev = scrollStep;
 
   if (e.deltaY > 0) {
-    scrollStep = Math.min(scrollStep + 1, 42);
+    scrollStep = Math.min(scrollStep + 1, 53);
   } else if (e.deltaY < 0) {
     scrollStep = Math.max(scrollStep - 1, 0);
   }
@@ -2227,14 +2242,294 @@ window.addEventListener("wheel", (e) => {
     animateIconsToTop30(scrollStep, true);
   }
 
-  if (scrollStep === 42) {
+  if (scrollStep === 42 && lastScrollStep !== 42) {
     animateIconsToTop30(scrollStep, true);
 
     zoomOutBackgroundVideo();
+
+    const centerIconColor =
+      currentShuffledIcons[currentCenterIndex]?.bgColor?.toLowerCase();
+
+    const newEighthVideo = eighthBackgroundVideos?.[centerIconColor];
+
+    if (newEighthVideo) {
+      updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+    }
+
+    setTimeout(() => {
+      showThreeImagesAroundCircle(centerIconColor);
+      updatePromptText(color);
+    }, 800);
+
+    isStep42Active = true;
   }
 
   previousScroll = scrollStep;
 });
+
+function showLeftTypingText53() {
+  const container = document.createElement("h2");
+  container.className = "left-typing-text-53";
+  container.style.position = "absolute";
+  container.style.top = "23%";
+  container.style.left = "13%";
+  container.style.color = "black";
+  container.style.fontSize = "48px";
+  container.style.fontWeight = "500";
+  container.style.fontFamily = "Arial, sans-serif";
+  container.style.whiteSpace = "pre-wrap";
+  container.style.zIndex = "999";
+  container.style.opacity = "0";
+  container.style.transition = "opacity 1s ease";
+
+  const span = document.createElement("span");
+  span.textContent = "Reference";
+  span.style.fontFamily = "'Dancing Script', cursive";
+  span.style.fontWeight = "600";
+
+  container.appendChild(span);
+  container.appendChild(document.createElement("br"));
+
+  container.append("and Remix");
+  container.appendChild(document.createElement("br"));
+  container.append("anything");
+
+  document.body.appendChild(container);
+
+  requestAnimationFrame(() => {
+    container.style.opacity = "1";
+  });
+}
+
+function showLeftDescriptionText53() {
+  const desc = document.createElement("p");
+  desc.className = "left-description-text-53";
+  desc.style.position = "absolute";
+  desc.style.top = "53%";
+  desc.style.left = "13%";
+  desc.style.color = "gray";
+  desc.style.fontSize = "18px";
+  desc.style.fontWeight = "400";
+  desc.style.fontFamily = "Arial, sans-serif";
+  desc.style.lineHeight = "1.6";
+  desc.style.opacity = "0";
+  desc.style.transition = "opacity 1s ease";
+  desc.style.zIndex = "999";
+
+  desc.innerHTML = `
+    Explore creative alternatives.<br>
+    Bring in your own image, style and character<br>
+    references. Make it exactly how you<br>
+    see it.
+  `;
+
+  document.body.appendChild(desc);
+
+  requestAnimationFrame(() => {
+    desc.style.opacity = "1";
+  });
+}
+
+function removeLeftText53() {
+  const typing = document.querySelector(".left-typing-text-53");
+  const desc = document.querySelector(".left-description-text-53");
+
+  if (typing) typing.remove();
+  if (desc) desc.remove();
+}
+
+function removeOldLeftTexts(callback) {
+  const oldH2 = document.querySelector(".left-typing-text-34");
+  const oldP = document.querySelector(".left-description-text-34");
+
+  if (oldH2) {
+    oldH2.style.transition = "opacity 0.5s ease";
+    oldH2.style.opacity = "0";
+    setTimeout(() => oldH2.remove(), 500);
+  }
+
+  if (oldP) {
+    oldP.style.transition = "opacity 0.5s ease";
+    oldP.style.opacity = "0";
+    setTimeout(() => oldP.remove(), 500);
+  }
+
+  setTimeout(() => {
+    if (typeof callback === "function") callback();
+  }, 550);
+}
+
+function loadDancingScriptFont() {
+  const existing = document.querySelector("link[href*='Dancing+Script']");
+  if (existing) return;
+
+  const link = document.createElement("link");
+  link.href =
+    "https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap";
+  link.rel = "stylesheet";
+  document.head.appendChild(link);
+}
+
+function handleScrollStep50To52() {
+  const circle = document.querySelector(".video-circle-overlay");
+  if (!circle) return;
+
+  circle.style.transition = "all 0.4s ease";
+  circle.style.backgroundColor = "transparent";
+  circle.style.boxShadow = "none";
+
+  const text = circle.querySelector("span");
+  if (text) {
+    text.style.borderRight = "none";
+  }
+
+  const icon = circle.querySelector("div");
+  if (icon) {
+    icon.style.transition = "opacity 0.3s ease";
+    icon.style.opacity = "0";
+    setTimeout(() => {
+      if (icon.parentNode) icon.parentNode.removeChild(icon);
+    }, 300);
+  }
+}
+
+function handleScrollStep49() {
+  const circle = document.querySelector(".video-circle-overlay");
+  if (!circle) return;
+
+  circle.style.transition = "all 0.4s ease";
+  circle.style.backgroundColor = "transparent";
+  circle.style.boxShadow = "none";
+
+  const text = circle.querySelector("span");
+  if (text) {
+    text.style.borderRight = "none";
+  }
+
+  const icon = circle.querySelector("div");
+  if (icon) {
+    icon.style.transition = "opacity 0.3s ease";
+    icon.style.opacity = "0";
+
+    setTimeout(() => {
+      if (icon.parentNode) icon.parentNode.removeChild(icon);
+    }, 300);
+  }
+}
+
+function resetScrollStep49Effects() {
+  const circle = document.querySelector(".video-circle-overlay");
+  if (!circle) return;
+
+  circle.style.display = "flex";
+  circle.style.opacity = "1";
+
+  const text = circle.querySelector("span");
+  if (text) {
+    text.style.borderRight = "1px solid black";
+  }
+
+  let icon = circle.querySelector("div");
+  if (!icon) {
+    icon = document.createElement("div");
+    icon.style.width = "5px";
+    icon.style.height = "5px";
+    icon.style.borderRadius = "50%";
+    icon.style.backgroundColor = "#000";
+    icon.style.display = "flex";
+    icon.style.justifyContent = "center";
+    icon.style.alignItems = "center";
+    icon.style.flexShrink = "0";
+    icon.style.transition = "opacity 0.3s ease";
+
+    const arrow = document.createElement("span");
+    arrow.textContent = "↑";
+    arrow.style.color = "#fff";
+    arrow.style.fontSize = "3px";
+    arrow.style.fontWeight = "bold";
+    icon.appendChild(arrow);
+
+    circle.appendChild(icon);
+  } else {
+    icon.style.opacity = "1";
+  }
+}
+
+function handleScrollStep48() {
+  const circle = document.querySelector(".video-circle-overlay");
+  const icon = circle?.querySelector("div");
+  const arrow = icon?.querySelector("span");
+
+  if (!circle || !icon || !arrow) return;
+
+  circle.style.backgroundColor = "#e0e0e0";
+  circle.style.opacity = "0.6";
+  circle.style.transition = "all 0.5s ease";
+
+  icon.style.backgroundColor = "#a5a5a5";
+
+  arrow.style.color = "#fff";
+  arrow.style.opacity = "0.8";
+}
+
+function resetCircleStyle() {
+  const circle = document.querySelector(".video-circle-overlay");
+  const icon = circle?.querySelector("div");
+  const arrow = icon?.querySelector("span");
+
+  if (!circle || !icon || !arrow) return;
+
+  circle.style.backgroundColor = "white";
+  circle.style.opacity = "1";
+  circle.style.transition = "all 0.5s ease";
+
+  icon.style.backgroundColor = "#000";
+
+  arrow.style.color = "#fff";
+  arrow.style.opacity = "1";
+}
+
+const promptTexts = {
+  "#32cd32": "Can I see this musician in Iceland",
+  "#3939dd": "Can I have the flowers in terrarium",
+  "#ffffff": "Can I have the model by the water",
+  "#ffa500": "Can I have the view for kitchen",
+  "#f04b4b": "Can I have this desert be raining",
+};
+
+let typeWriterTimeouts = [];
+
+function updatePromptText(bgColor) {
+  const text = promptTexts[bgColor];
+  const circle = document.querySelector(".video-circle-overlay");
+
+  if (!text || !circle) return;
+
+  const span = circle.querySelector("span");
+  if (!span) return;
+
+  typeWriterTimeouts.forEach((id) => clearTimeout(id));
+  typeWriterTimeouts = [];
+
+  span.textContent = "";
+
+  let i = 0;
+
+  function typeWriter() {
+    if (i < text.length) {
+      span.textContent += text.charAt(i);
+      const timeoutId = setTimeout(typeWriter, 25);
+      typeWriterTimeouts.push(timeoutId);
+      i++;
+    }
+  }
+
+  typeWriter();
+}
+
+let last42ImageBgColor = null;
+
+let imageElements = [];
 
 const iconImageMap = {
   "#32cd32": ["../img/green_1.jpg", "../img/green_2.jpg", "../img/green_3.jpg"],
@@ -2247,8 +2542,6 @@ const iconImageMap = {
   ],
   "#f04b4b": ["../img/red_1.jpg", "../img/red_2.jpg", "../img/red_3.jpg"],
 };
-
-let lastScrollStep = null;
 
 function zoomOutBackgroundVideo() {
   const video = document.getElementById("eightVideo");
@@ -2264,18 +2557,217 @@ function resetBackgroundVideo() {
   if (!video) return;
 
   video.style.transform = "translate(0%, 0%) scale(1)";
+  video.style.transition = "transform 0.5s ease, opacity 0.5s ease";
   video.style.borderRadius = "7px";
   video.style.opacity = "1";
 }
 
-function handleScrollStep(scrollStep) {
-  if (scrollStep === 42 && lastScrollStep !== 42) {
-    zoomOutBackgroundVideo();
-  } else if (scrollStep < 42 && lastScrollStep === 42) {
+function showThreeImagesAroundCircle(bgColor) {
+  const imageUrls = iconImageMap[bgColor.toLowerCase()];
+  if (!imageUrls) return;
+
+  last42ImageBgColor = bgColor.toLowerCase();
+
+  const container = document.getElementById("imageAroundCircleContainer");
+
+  if (!container) {
+    const newContainer = document.createElement("div");
+    newContainer.id = "imageAroundCircleContainer";
+    newContainer.style.position = "absolute";
+    newContainer.style.top = "50%";
+    newContainer.style.left = "50%";
+    newContainer.style.transform = "translate(-50%, -50%)";
+    newContainer.style.zIndex = "5";
+    newContainer.style.pointerEvents = "none";
+    document.body.appendChild(newContainer);
+  }
+
+  const imageContainer = document.getElementById("imageAroundCircleContainer");
+  imageContainer.innerHTML = "";
+
+  const positions = [
+    {
+      top: "-200px",
+      left: "120px",
+      width: "150px",
+      height: "220px",
+      borderRadius: "20px",
+      delay: "0.1s",
+    },
+    {
+      top: "-200px",
+      left: "280px",
+      width: "200px",
+      height: "220px",
+      borderRadius: "20px",
+      delay: "0.1s",
+    },
+    {
+      top: "120px",
+      left: "120px",
+      width: "360px",
+      height: "180px",
+      borderRadius: "25px",
+      delay: "0.1s",
+    },
+  ];
+
+  imageUrls.forEach((url, index) => {
+    const img = document.createElement("img");
+    const pos = positions[index];
+
+    img.src = url;
+    img.style.position = "absolute";
+    img.style.top = pos.top;
+    img.style.left = pos.left;
+    img.style.width = pos.width;
+    img.style.height = pos.height;
+    img.style.borderRadius = pos.borderRadius;
+    img.style.objectFit = "cover";
+    img.style.opacity = "0";
+    img.style.transform = "scale(0.2)";
+    img.style.transition = `all 0.8s ease ${pos.delay}`;
+    img.style.boxShadow = "0 8px 25px rgba(0, 0, 0, 0.3)";
+    imageContainer.appendChild(img);
+
+    setTimeout(() => {
+      img.style.opacity = "1";
+      img.style.transform = "scale(1)";
+    }, 50);
+  });
+}
+
+function hideThreeImagesAroundCircle(callbackAfterHide) {
+  const imageContainer = document.getElementById("imageAroundCircleContainer");
+  if (!imageContainer) {
+    if (typeof callbackAfterHide === "function") callbackAfterHide();
+    return;
+  }
+
+  const images = imageContainer.querySelectorAll("img");
+  images.forEach((img) => {
+    img.style.transition = "transform 0.6s ease, opacity 0.6s ease";
+    img.style.opacity = "0";
+    img.style.transform = "scale(0.2)";
+  });
+
+  setTimeout(() => {
+    imageContainer.innerHTML = "";
+
     resetBackgroundVideo();
+
+    if (typeof callbackAfterHide === "function") {
+      callbackAfterHide();
+    }
+  }, 700);
+}
+
+let isStep42Active = false;
+let isStep48Active = false;
+let isStep49Active = false;
+let isStep53Active = false;
+let lastScrollStep = 0;
+
+function handleScrollStep(scrollStep) {
+  if (
+    scrollStep >= 42 &&
+    scrollStep <= 47 &&
+    (lastScrollStep < 42 || lastScrollStep > 47)
+  ) {
+    animateIconsToTop30(scrollStep, true);
+    zoomOutBackgroundVideo();
+
+    const centerIconColor = currentShuffledIcons[currentCenterIndex]?.bgColor?.toLowerCase();
+    last42ImageBgColor = centerIconColor;
+
+    const newEighthVideo = eighthBackgroundVideos?.[centerIconColor];
+    if (newEighthVideo) {
+      updateEighthBackgroundVideoSrcOnly(newEighthVideo);
+    }
+
+    setTimeout(() => {
+      showThreeImagesAroundCircle(centerIconColor);
+      updatePromptText(centerIconColor);
+    }, 800);
+
+    isStep42Active = true;
+  }
+
+  if (scrollStep === 48 && lastScrollStep !== 48) {
+    handleScrollStep48();
+    isStep48Active = true;
+  }
+
+  if (lastScrollStep >= 42 && lastScrollStep <= 48 && scrollStep < 42) {
+    hideThreeImagesAroundCircle(() => {
+      const color = last42ImageBgColor;
+      const newVideo = eighthBackgroundVideos?.[color];
+      if (newVideo) updateEighthBackgroundVideoSrcOnly(newVideo);
+      resetBackgroundVideo();
+    });
+
+    isStep42Active = false;
+  }
+
+  if (lastScrollStep === 48 && scrollStep < 48) {
+    resetCircleStyle();
+    isStep48Active = false;
+  }
+
+  if (
+    (scrollStep >= 49 && scrollStep <= 52) &&
+    !(lastScrollStep >= 49 && lastScrollStep <= 52)
+  ) {
+    handleScrollStep49();
+    isStep49Active = true;
+  }
+
+  if (lastScrollStep >= 49 && lastScrollStep <= 52 && scrollStep < 49) {
+    resetScrollStep49Effects();
+    isStep49Active = false;
+  }
+
+  if (scrollStep === 53 && lastScrollStep !== 53) {
+    loadDancingScriptFont();
+    removeOldLeftTexts(() => {
+      showLeftTypingText53();
+      showLeftDescriptionText53();
+    });
+
+    isStep53Active = true;
+  }
+
+  if (lastScrollStep === 53 && scrollStep < 53) {
+    removeLeftText53();
+
+    setTimeout(() => {
+      showLeftTypingText34();
+      showLeftDescriptionText34();
+    }, 100);
+
+    isStep53Active = false;
   }
 
   lastScrollStep = scrollStep;
+}
+
+function getCenterMiddleIconBgColor() {
+  const iconRow = document.getElementById("iconRow");
+  if (!iconRow) return null;
+
+  const icons = Array.from(iconRow.children).filter(
+    (el) =>
+      el.classList.contains("center-replacement-icon") ||
+      el.classList.contains("side-icon")
+  );
+
+  if (icons.length >= 3) {
+    const centerIndex = Math.floor(icons.length / 2);
+    const centerIcon = icons[centerIndex];
+    return centerIcon.dataset.bgColor || null;
+  }
+
+  return null;
 }
 
 function scaleEighthVideoExtra38() {

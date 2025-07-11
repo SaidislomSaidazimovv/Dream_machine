@@ -893,9 +893,107 @@ body[data-scroll="42"] .profile-image {
   height: 100%;
   object-fit: cover;
   transition: transform 1s ease, opacity 1s ease;
-  z-index: -1; /* boshqa elementlar ustida bo'lmasin */
+  z-index: -1;
 }
 
+body[data-scroll="43"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="44"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="45"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="46"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="47"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="48"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="49"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="50"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="51"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="52"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
+
+body[data-scroll="53"] .profile-image {
+  width: 350px;
+  height: 350px;
+  margin-bottom: -600px;
+  scale: 1.5;
+  transform: translateX(-35%) translateY(200px);
+  transition: 1.5s;
+}
 
 .icon-header-text,
 .icon-description-text {
