@@ -133,7 +133,7 @@ const eighthBackgroundVideos = {
 };
 
 const thumb = document.getElementById("scrollbarThumb");
-const maxStep = 53;
+const maxStep = 67;
 
 function updateThumb(scrollStep) {
   const trackHeight = window.innerHeight;
@@ -1444,7 +1444,7 @@ window.addEventListener("wheel", (e) => {
   const prev = scrollStep;
 
   if (e.deltaY > 0) {
-    scrollStep = Math.min(scrollStep + 1, 53);
+    scrollStep = Math.min(scrollStep + 1, 67);
   } else if (e.deltaY < 0) {
     scrollStep = Math.max(scrollStep - 1, 0);
   }
@@ -2267,8 +2267,68 @@ window.addEventListener("wheel", (e) => {
   previousScroll = scrollStep;
 });
 
+const iconLastIMage = {
+  "#32cd32": ["../img/last_green.jpg", "../img/last_green2.jpg", "../img/last_green3.jpg"],
+  "#3939dd": ["../img/last_blue.jpg", "../img/last_blue2.jpg", "../img/last_blue3.jpg"],
+  "#ffffff": ["../img/last_gray.jpg", "../img/last_gray2.jpg", "../img/last_gray3.jpg"],
+  "#ffa500": [
+    "../img/last_orange.jpg",
+    "../img/last_orange2.jpg",
+    "../img/last_orange3.jpg",
+  ],
+  "#f04b4b": ["../img/last_red.jpg", "../img/last_red2.jpg", "../img/last_red3.jpg"],
+};
+
+function showOverlayImages(bgColor) {
+  const images = iconLastIMage[bgColor];
+  if (!images) return;
+
+  document.querySelectorAll(".overlay-faded-image").forEach((img) => img.remove());
+
+  images.forEach((src, index) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.className = "overlay-faded-image";
+    img.style.position = "absolute";
+
+    if (index === 0) {
+      img.style.top = "165px";
+      img.style.left = "888px";
+      img.style.width = "150px";
+      img.style.height = "220px";
+      img.style.borderRadius = "20px";
+    } else if (index === 1) {
+      img.style.top = "165px";
+      img.style.left = "1048px";
+      img.style.width = "200px";
+      img.style.height = "220px";
+      img.style.borderRadius = "20px";
+    } else if (index === 2) {
+      img.style.top = "484px";
+      img.style.left = "888px";
+      img.style.width = "360px";
+      img.style.height = "180px";
+      img.style.borderRadius = "25px";
+    }
+
+    
+    img.style.opacity = "0.60";
+    img.style.zIndex = "1";
+    img.style.transition = "opacity 0.8s ease";
+
+    document.body.appendChild(img);
+  });
+}
+
+function resetOverlayImages() {
+  document.querySelectorAll(".overlay-faded-image").forEach((img) => img.remove());
+}
+
 function showLeftTypingText53() {
-  const container = document.createElement("h2");
+  const existing = document.querySelector(".left-typing-text-53");
+  if (existing) existing.remove();
+
+  const container = document.createElement("div");
   container.className = "left-typing-text-53";
   container.style.position = "absolute";
   container.style.top = "23%";
@@ -2279,26 +2339,68 @@ function showLeftTypingText53() {
   container.style.fontFamily = "Arial, sans-serif";
   container.style.whiteSpace = "pre-wrap";
   container.style.zIndex = "999";
-  container.style.opacity = "0";
-  container.style.transition = "opacity 1s ease";
-
-  const span = document.createElement("span");
-  span.textContent = "Reference";
-  span.style.fontFamily = "'Dancing Script', cursive";
-  span.style.fontWeight = "600";
-
-  container.appendChild(span);
-  container.appendChild(document.createElement("br"));
-
-  container.append("and Remix");
-  container.appendChild(document.createElement("br"));
-  container.append("anything");
 
   document.body.appendChild(container);
 
-  requestAnimationFrame(() => {
-    container.style.opacity = "1";
-  });
+  const line1Text = "Reference";
+  const line2Text = "and Remix";
+  const line3Text = "anything";
+
+  const spanRef = document.createElement("span");
+  spanRef.style.fontFamily = "'Dancing Script', cursive";
+  spanRef.style.fontWeight = "600";
+
+  container.appendChild(spanRef);
+
+  let i = 0;
+
+  function typeRef() {
+    if (i < line1Text.length) {
+      spanRef.textContent += line1Text.charAt(i);
+      i++;
+      setTimeout(typeRef, 60);
+    } else {
+      container.appendChild(document.createElement("br"));
+      typeLine2();
+    }
+  }
+
+  function typeLine2() {
+    let j = 0;
+    const line2 = document.createElement("span");
+    container.appendChild(line2);
+
+    function type() {
+      if (j < line2Text.length) {
+        line2.textContent += line2Text.charAt(j);
+        j++;
+        setTimeout(type, 60);
+      } else {
+        container.appendChild(document.createElement("br"));
+        typeLine3();
+      }
+    }
+
+    type();
+  }
+
+  function typeLine3() {
+    let k = 0;
+    const line3 = document.createElement("span");
+    container.appendChild(line3);
+
+    function type() {
+      if (k < line3Text.length) {
+        line3.textContent += line3Text.charAt(k);
+        k++;
+        setTimeout(type, 60);
+      }
+    }
+
+    type();
+  }
+
+  typeRef();
 }
 
 function showLeftDescriptionText53() {
@@ -2381,6 +2483,7 @@ function handleScrollStep50To52() {
   const text = circle.querySelector("span");
   if (text) {
     text.style.borderRight = "none";
+    text.style.color = "#000";
   }
 
   const icon = circle.querySelector("div");
@@ -2404,6 +2507,7 @@ function handleScrollStep49() {
   const text = circle.querySelector("span");
   if (text) {
     text.style.borderRight = "none";
+    text.style.color = "#000";
   }
 
   const icon = circle.querySelector("div");
@@ -2500,32 +2604,38 @@ const promptTexts = {
 let typeWriterTimeouts = [];
 
 function updatePromptText(bgColor) {
-  const text = promptTexts[bgColor];
   const circle = document.querySelector(".video-circle-overlay");
-
-  if (!text || !circle) return;
+  if (!circle) return;
 
   const span = circle.querySelector("span");
   if (!span) return;
 
-  typeWriterTimeouts.forEach((id) => clearTimeout(id));
-  typeWriterTimeouts = [];
+  const text = promptTexts[bgColor];
+  if (!text) {
+    console.warn("⚠️ promptTexts da bu rang uchun text topilmadi:", bgColor);
+    span.textContent = "";
+    return;
+  }
 
   span.textContent = "";
 
-  let i = 0;
+  if (isStep53Active) {
+    highlightPromptWordsInCircle(bgColor);
+    return;
+  }
 
+  let i = 0;
   function typeWriter() {
     if (i < text.length) {
       span.textContent += text.charAt(i);
-      const timeoutId = setTimeout(typeWriter, 25);
-      typeWriterTimeouts.push(timeoutId);
+      setTimeout(typeWriter, 25);
       i++;
     }
   }
 
   typeWriter();
 }
+
 
 let last42ImageBgColor = null;
 
@@ -2727,28 +2837,189 @@ function handleScrollStep(scrollStep) {
     isStep49Active = false;
   }
 
-  if (scrollStep === 53 && lastScrollStep !== 53) {
+  if (scrollStep >= 53 &&
+  scrollStep <= 66 &&
+  (lastScrollStep < 53 || lastScrollStep > 66)) {
     loadDancingScriptFont();
     removeOldLeftTexts(() => {
       showLeftTypingText53();
       showLeftDescriptionText53();
     });
 
+    highlightPromptWordsInCircle(last42ImageBgColor);
+
     isStep53Active = true;
   }
 
-  if (lastScrollStep === 53 && scrollStep < 53) {
+  if (lastScrollStep >= 53 && lastScrollStep <= 66 && scrollStep < 53) {
     removeLeftText53();
-
     setTimeout(() => {
       showLeftTypingText34();
       showLeftDescriptionText34();
     }, 100);
 
     isStep53Active = false;
+    resetExtraInfo();
   }
 
+  if (scrollStep === 67 && lastScrollStep !== 67) {
+    resetExtraInfo(true);
+  showLeftTypingText53();
+  showLeftDescriptionText53();
+  highlightPromptWordsInCircle(last42ImageBgColor, true);
+
+  showOverlayImages(last42ImageBgColor);
+
+  isStep53Active = true;
+}
+
+if (lastScrollStep === 67 && scrollStep < 67) {
+  resetOverlayImages();
+}
+
   lastScrollStep = scrollStep;
+}
+
+const extraTextMap = {
+  "Iceland": ["Greenland", "Norwegian fjords", "Patagonian glaciers", "Tokyo city"],
+  "terrarium": ["sand garden", "hanging planter", "aquaponics setup", "zen sanctuary"],
+  "water": ["chromium space", "ethereal ice cavern", "desert dunes", "vivide coral reef"],
+  "kitchen": ["bedroom", "living room", "bathroom", "outdoor patio"],
+  "raining": ["snowing", "foggy", "stormy", "eclipsing"]
+};
+
+function showExtraInfoForWord(word) {
+  resetExtraInfo();
+
+  const texts = extraTextMap[word];
+  if (!texts) return;
+
+  const circle = document.querySelector(".video-circle-overlay");
+  if (!circle) return;
+
+  const targetWord = [...circle.querySelectorAll("span")].find(
+    (el) => el.textContent.trim() === word
+  );
+  if (!targetWord) return;
+
+  const rect = targetWord.getBoundingClientRect();
+
+  const container = document.createElement("div");
+  container.className = "extra-info-container";
+  container.style.position = "absolute";
+  container.style.left = `${rect.left}px`;
+  container.style.top = `${rect.bottom + 10}px`;
+  container.style.display = "flex";
+  container.style.flexDirection = "column";
+  container.style.alignItems = "flex-start";
+  container.style.gap = "8px";
+  container.style.zIndex = "9999";
+
+  texts.forEach((text, index) => {
+    const el = document.createElement("div");
+    el.textContent = text;
+    el.style.background = "#fff";
+    el.style.color = "#000";
+    el.style.fontSize = "18px";
+    el.style.padding = "10px 12px";
+    el.style.borderRadius = "9999px";
+    el.style.opacity = "0";
+    el.style.transform = "translateY(10px)";
+    el.style.transition = `opacity 0.4s ${index * 0.15}s ease, transform 0.4s ${index * 0.15}s ease`;
+    container.appendChild(el);
+
+    requestAnimationFrame(() => {
+      el.style.opacity = "1";
+      el.style.transform = "translateY(0)";
+    });
+  });
+
+  document.body.appendChild(container);
+}
+
+function resetExtraInfo(force = false) {
+  const allExtraContainers = document.querySelectorAll(".extra-info-container, .extra-info-under-word");
+  allExtraContainers.forEach((container) => {
+    container.style.opacity = "0";
+    container.style.transform = "translateY(10px)";
+    container.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+
+    setTimeout(() => {
+      if (container && container.parentNode) {
+        container.parentNode.removeChild(container);
+      }
+    }, 300);
+  });
+
+  if (!force && isStep53Active) return;
+
+  const circleSpan = document.querySelector(".video-circle-overlay span");
+  if (circleSpan) {
+    const highlightedWords = circleSpan.querySelectorAll("span");
+    highlightedWords.forEach((wordSpan) => {
+      wordSpan.style.border = "none";
+      wordSpan.style.borderRadius = "0";
+      wordSpan.style.padding = "0";
+      wordSpan.style.display = "inline";
+    });
+  }
+}
+
+const promptHighlightWords = {
+  "#32cd32": ["musician", "Iceland"],
+  "#3939dd": ["flowers", "terrarium"],
+  "#ffffff": ["model", "water"],
+  "#ffa500": ["view", "kitchen"],
+  "#f04b4b": ["desert", "raining"]
+};
+
+function highlightPromptWordsInCircle(bgColor, disableExtra = false) {
+  resetExtraInfo(true); 
+
+  const circle = document.querySelector(".video-circle-overlay");
+  if (!circle) return;
+
+  const span = circle.querySelector("span");
+  if (!span) return;
+
+  const text = promptTexts[bgColor];
+  if (!text) return;
+
+  const highlightWords = promptHighlightWords[bgColor] || [];
+  const words = text.split(" ");
+
+  span.innerHTML = "";
+
+  words.forEach((word, index) => {
+    const wordSpan = document.createElement("span");
+    wordSpan.textContent = word;
+
+    if (highlightWords.includes(word)) {
+      wordSpan.style.display = "inline-block";
+      wordSpan.style.border = "0.1px solid black";
+      wordSpan.style.borderRadius = "9999px";
+      wordSpan.style.padding = "1px";
+      wordSpan.style.verticalAlign = "middle";
+    }
+
+    span.appendChild(wordSpan);
+    if (index !== words.length - 1) {
+      span.appendChild(document.createTextNode(" "));
+    }
+  });
+
+  if (disableExtra) return;
+
+  setTimeout(() => {
+    const highlightedWords = span.querySelectorAll("span[style*='border']");
+    const lastWord = highlightedWords[highlightedWords.length - 1];
+    if (lastWord) {
+      const word = lastWord.textContent.trim();
+      if (extraTextMap[word]) {
+        showExtraInfoForWord(word);
+      }
+    }
+  }, 100);
 }
 
 function getCenterMiddleIconBgColor() {
