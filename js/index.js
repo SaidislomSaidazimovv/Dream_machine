@@ -3473,7 +3473,9 @@ function handleScrollStep(scrollStep) {
       Object.assign(container.style, {
         display: "flex",
         gap: "40px",
-        padding: "0 50vw",
+        paddingLeft: "50vw",
+        paddingRight: "50vw",
+        alignItems: "center",
       });
 
       const DMVideosAndPhotos = [
@@ -3524,6 +3526,14 @@ function handleScrollStep(scrollStep) {
 
       wrapper.appendChild(container);
       document.body.appendChild(wrapper);
+      scaleMediaOnCenter(wrapper, container);
+
+      const totalMedia = DMVideosAndPhotos.length;
+      const gap = 60;
+      const totalMediaWidth = totalMedia * mediaWidth + (totalMedia - 9) * gap;
+      const extraScroll = window.innerWidth / 15;
+
+      container.style.minWidth = `${totalMediaWidth + extraScroll}px`;
 
       const scrollbarContainer = document.createElement("div");
       scrollbarContainer.className = "custom-scrollbar";
@@ -3565,20 +3575,22 @@ function handleScrollStep(scrollStep) {
     `;
       document.head.appendChild(style);
 
-      let isDragging = false;
+      let isWrapperDragging = false;
       let startX = 0;
       let scrollStart = 0;
 
-      document.addEventListener("mousedown", (e) => {
+      wrapper.addEventListener("mousedown", (e) => {
         const isInHeader = e.clientY < 100;
         const isInFooter = e.clientY > window.innerHeight - 100;
-        const wrapper = document.querySelector(".dm-scroll-wrapper");
 
-        if (wrapper && !isInHeader && !isInFooter) {
-          isDragging = true;
+        if (
+          !e.target.closest(".custom-scrollbar") &&
+          !isInHeader &&
+          !isInFooter
+        ) {
+          isWrapperDragging = true;
           startX = e.clientX;
           scrollStart = wrapper.scrollLeft;
-
           wrapper.style.cursor = "grabbing";
 
           dragCursor.style.backgroundColor = "#ff6b6b";
@@ -3590,22 +3602,16 @@ function handleScrollStep(scrollStep) {
       });
 
       document.addEventListener("mouseup", () => {
-        if (isDragging) {
-          isDragging = false;
-          const wrapper = document.querySelector(".dm-scroll-wrapper");
-          if (wrapper) wrapper.style.cursor = "grab";
+        isWrapperDragging = false;
+        if (wrapper) wrapper.style.cursor = "grab";
 
-          dragCursor.style.backgroundColor = "#fff";
-          dragCursor.style.color = "#000";
-          dragCursor.innerText = "Drag ↔";
-        }
+        dragCursor.style.backgroundColor = "#fff";
+        dragCursor.style.color = "#000";
+        dragCursor.innerText = "Drag ↔";
       });
 
       document.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        const wrapper = document.querySelector(".dm-scroll-wrapper");
-        if (!wrapper) return;
-
+        if (!isWrapperDragging) return;
         const dx = e.clientX - startX;
         const newScrollLeft = scrollStart - dx;
 
@@ -3614,6 +3620,38 @@ function handleScrollStep(scrollStep) {
           Math.min(wrapper.scrollWidth - wrapper.clientWidth, newScrollLeft)
         );
 
+        updateScrollbar?.();
+      });
+
+      let isThumbDragging = false;
+      let thumbStartX = 0;
+      let thumbScrollStart = 0;
+
+      scrollbarThumb.addEventListener("mousedown", (e) => {
+        isThumbDragging = true;
+        thumbStartX = e.clientX;
+        thumbScrollStart = wrapper.scrollLeft;
+        document.body.style.userSelect = "none";
+        e.preventDefault();
+      });
+
+      document.addEventListener("mouseup", () => {
+        isThumbDragging = false;
+        document.body.style.userSelect = "";
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isThumbDragging) return;
+
+        const dx = e.clientX - thumbStartX;
+        const scrollWidth = wrapper.scrollWidth;
+        const clientWidth = wrapper.clientWidth;
+        const trackWidth = 150;
+        const thumbWidth = scrollbarThumb.offsetWidth;
+        const scrollRatio =
+          (scrollWidth - clientWidth) / (trackWidth - thumbWidth);
+
+        wrapper.scrollLeft = thumbScrollStart + dx * scrollRatio;
         updateScrollbar?.();
       });
 
@@ -3631,6 +3669,7 @@ function handleScrollStep(scrollStep) {
       }
 
       scrollbarContainer.addEventListener("click", (e) => {
+        if (isThumbDragging) return;
         const rect = scrollbarContainer.getBoundingClientRect();
         const clickX = e.clientX - rect.left;
         const scrollPercentage = clickX / 150;
@@ -3655,12 +3694,12 @@ function handleScrollStep(scrollStep) {
       Object.assign(dragCursor.style, {
         position: "fixed",
         zIndex: "10020",
-        padding: "6px 16px",
+        padding: "16px 22px",
         fontSize: "14px",
         fontWeight: "500",
         color: "#000",
         backgroundColor: "#fff",
-        borderRadius: "5px",
+        borderRadius: "50%",
         pointerEvents: "none",
         transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
         transform: "translate(-50%, -50%)",
@@ -3726,6 +3765,30 @@ function handleScrollStep(scrollStep) {
           dragCursor.style.scale = "0.8";
         }
       });
+
+      function scaleMediaOnCenter(wrapper, container) {
+        const medias = container.querySelectorAll("video, img");
+
+        wrapper.addEventListener("scroll", () => {
+          const wrapperCenter = wrapper.scrollLeft + wrapper.clientWidth / 2;
+
+          medias.forEach((media) => {
+            const rect = media.getBoundingClientRect();
+            const mediaCenter = rect.left + rect.width / 2;
+            const distanceToCenter = Math.abs(
+              mediaCenter - window.innerWidth / 2
+            );
+
+            if (distanceToCenter < 100) {
+              media.style.transform = "scale(1.1)";
+              media.style.zIndex = "2";
+            } else {
+              media.style.transform = "scale(1)";
+              media.style.zIndex = "1";
+            }
+          });
+        });
+      }
     }
   }
 
