@@ -133,7 +133,7 @@ const eighthBackgroundVideos = {
 };
 
 const thumb = document.getElementById("scrollbarThumb");
-const maxStep = 67;
+const maxStep = 86;
 
 function updateThumb(scrollStep) {
   const trackHeight = window.innerHeight;
@@ -1233,6 +1233,73 @@ function setupIconClickSwap() {
         }
         last42ImageBgColor = newColor;
       }
+
+      last42ImageBgColor = newColor;
+
+      updatePromptText(newColor);
+
+      if (scrollStep === 67) {
+        highlightPromptWordsInCircle(newColor, true, true);
+        showOverlayImages(newColor);
+      } else if (isStep53Active) {
+        highlightPromptWordsInCircle(newColor);
+      }
+
+      if (scrollStep === 68) {
+        resetOnlyBackgroundImages();
+
+        showOverlayImages(newColor);
+
+        setTimeout(() => {
+          updateOverlayImagesOpacity("1");
+        }, 100);
+
+        highlightPromptWordsInCircle(newColor, true, true);
+      } else if (isStep53Active) {
+        highlightPromptWordsInCircle(newColor);
+      }
+
+      if (scrollStep >= 69 && scrollStep <= 73) {
+        resetOnlyBackgroundImages();
+
+        showOverlayImages(newColor);
+
+        setTimeout(() => {
+          updateOverlayImagesOpacity("1");
+        }, 100);
+
+        highlightPromptWordsInCircle(newColor, true, true);
+      } else if (isStep53Active) {
+        highlightPromptWordsInCircle(newColor);
+      }
+
+      if (scrollStep === 74) {
+        resetOnlyBackgroundImages();
+
+        showOverlayImages(newColor);
+
+        setTimeout(() => {
+          updateOverlayImagesOpacity("1");
+        }, 100);
+
+        highlightPromptWordsInCircle(newColor, true, true);
+      } else if (isStep53Active) {
+        highlightPromptWordsInCircle(newColor);
+      }
+
+      if (scrollStep === 75) {
+        resetOnlyBackgroundImages();
+
+        showOverlayImages(newColor);
+
+        setTimeout(() => {
+          updateOverlayImagesOpacity("1");
+        }, 100);
+
+        highlightPromptWordsInCircle(newColor, true, true);
+      } else if (isStep53Active) {
+        highlightPromptWordsInCircle(newColor);
+      }
     });
   });
 }
@@ -1444,7 +1511,7 @@ window.addEventListener("wheel", (e) => {
   const prev = scrollStep;
 
   if (e.deltaY > 0) {
-    scrollStep = Math.min(scrollStep + 1, 67);
+    scrollStep = Math.min(scrollStep + 1, 86);
   } else if (e.deltaY < 0) {
     scrollStep = Math.max(scrollStep - 1, 0);
   }
@@ -2268,28 +2335,49 @@ window.addEventListener("wheel", (e) => {
 });
 
 const iconLastIMage = {
-  "#32cd32": ["../img/last_green.jpg", "../img/last_green2.jpg", "../img/last_green3.jpg"],
-  "#3939dd": ["../img/last_blue.jpg", "../img/last_blue2.jpg", "../img/last_blue3.jpg"],
-  "#ffffff": ["../img/last_gray.jpg", "../img/last_gray2.jpg", "../img/last_gray3.jpg"],
+  "#32cd32": [
+    "../img/last_green.jpg",
+    "../img/last_green2.jpg",
+    "../img/last_green3.jpg",
+  ],
+  "#3939dd": [
+    "../img/last_blue.jpg",
+    "../img/last_blue2.jpg",
+    "../img/last_blue3.jpg",
+  ],
+  "#ffffff": [
+    "../img/last_gray.jpg",
+    "../img/last_gray2.jpg",
+    "../img/last_gray3.jpg",
+  ],
   "#ffa500": [
     "../img/last_orange.jpg",
     "../img/last_orange2.jpg",
     "../img/last_orange3.jpg",
   ],
-  "#f04b4b": ["../img/last_red.jpg", "../img/last_red2.jpg", "../img/last_red3.jpg"],
+  "#f04b4b": [
+    "../img/last_red.jpg",
+    "../img/last_red2.jpg",
+    "../img/last_red3.jpg",
+  ],
 };
 
-function showOverlayImages(bgColor) {
+function showOverlayImages(bgColor, is67 = false) {
   const images = iconLastIMage[bgColor];
   if (!images) return;
 
-  document.querySelectorAll(".overlay-faded-image").forEach((img) => img.remove());
+  document
+    .querySelectorAll(".overlay-faded-image")
+    .forEach((img) => img.remove());
 
   images.forEach((src, index) => {
     const img = document.createElement("img");
     img.src = src;
     img.className = "overlay-faded-image";
     img.style.position = "absolute";
+    img.style.opacity = is67 ? "0.25" : "1";
+    img.style.zIndex = is67 ? "1" : "2";
+    img.style.transition = "opacity 0.6s ease";
 
     if (index === 0) {
       img.style.top = "165px";
@@ -2311,7 +2399,6 @@ function showOverlayImages(bgColor) {
       img.style.borderRadius = "25px";
     }
 
-    
     img.style.opacity = "0.60";
     img.style.zIndex = "1";
     img.style.transition = "opacity 0.8s ease";
@@ -2321,7 +2408,9 @@ function showOverlayImages(bgColor) {
 }
 
 function resetOverlayImages() {
-  document.querySelectorAll(".overlay-faded-image").forEach((img) => img.remove());
+  document
+    .querySelectorAll(".overlay-faded-image")
+    .forEach((img) => img.remove());
 }
 
 function showLeftTypingText53() {
@@ -2636,7 +2725,6 @@ function updatePromptText(bgColor) {
   typeWriter();
 }
 
-
 let last42ImageBgColor = null;
 
 let imageElements = [];
@@ -2787,7 +2875,8 @@ function handleScrollStep(scrollStep) {
     animateIconsToTop30(scrollStep, true);
     zoomOutBackgroundVideo();
 
-    const centerIconColor = currentShuffledIcons[currentCenterIndex]?.bgColor?.toLowerCase();
+    const centerIconColor =
+      currentShuffledIcons[currentCenterIndex]?.bgColor?.toLowerCase();
     last42ImageBgColor = centerIconColor;
 
     const newEighthVideo = eighthBackgroundVideos?.[centerIconColor];
@@ -2825,7 +2914,8 @@ function handleScrollStep(scrollStep) {
   }
 
   if (
-    (scrollStep >= 49 && scrollStep <= 52) &&
+    scrollStep >= 49 &&
+    scrollStep <= 52 &&
     !(lastScrollStep >= 49 && lastScrollStep <= 52)
   ) {
     handleScrollStep49();
@@ -2837,9 +2927,11 @@ function handleScrollStep(scrollStep) {
     isStep49Active = false;
   }
 
-  if (scrollStep >= 53 &&
-  scrollStep <= 66 &&
-  (lastScrollStep < 53 || lastScrollStep > 66)) {
+  if (
+    scrollStep >= 53 &&
+    scrollStep <= 66 &&
+    (lastScrollStep < 53 || lastScrollStep > 66)
+  ) {
     loadDancingScriptFont();
     removeOldLeftTexts(() => {
       showLeftTypingText53();
@@ -2864,28 +2956,538 @@ function handleScrollStep(scrollStep) {
 
   if (scrollStep === 67 && lastScrollStep !== 67) {
     resetExtraInfo(true);
-  showLeftTypingText53();
-  showLeftDescriptionText53();
-  highlightPromptWordsInCircle(last42ImageBgColor, true);
+    showLeftTypingText53();
+    showLeftDescriptionText53();
+    highlightPromptWordsInCircle(last42ImageBgColor, true, true);
 
-  showOverlayImages(last42ImageBgColor);
+    showOverlayImages(last42ImageBgColor, true);
 
-  isStep53Active = true;
-}
+    isStep53Active = true;
+  }
 
-if (lastScrollStep === 67 && scrollStep < 67) {
-  resetOverlayImages();
-}
+  if (lastScrollStep === 67 && scrollStep < 67) {
+    resetOverlayImages();
+  }
+
+  if (scrollStep === 68 && lastScrollStep !== 68) {
+    resetOnlyBackgroundImages();
+
+    resetExtraInfo(true);
+    showLeftTypingText53();
+    showLeftDescriptionText53();
+    highlightPromptWordsInCircle(last42ImageBgColor, true, true);
+    showOverlayImages(last42ImageBgColor, true);
+
+    setTimeout(() => {
+      updateOverlayImagesOpacity("1");
+    }, 100);
+
+    isStep53Active = true;
+  }
+
+  if (lastScrollStep === 68 && scrollStep < 68) {
+    showThreeImagesAroundCircle(last42ImageBgColor);
+  }
+
+  if (
+    scrollStep >= 69 &&
+    scrollStep <= 73 &&
+    (lastScrollStep < 69 || lastScrollStep > 73)
+  ) {
+    resetOnlyBackgroundImages();
+    showOverlayImages(last42ImageBgColor);
+
+    setTimeout(() => {
+      updateOverlayImagesOpacity("1");
+    }, 100);
+
+    highlightPromptWordsInCircle(last42ImageBgColor, true, true);
+
+    isStep53Active = true;
+  }
+
+  if (lastScrollStep >= 69 && lastScrollStep <= 73 && scrollStep < 69) {
+    resetOverlayImages();
+  }
+
+  if (scrollStep === 74 && lastScrollStep !== 74) {
+    applyOpacityToRightContent();
+    const h2 = document.querySelector(".left-typing-text-53");
+    if (h2) {
+      h2.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+      h2.style.opacity = "0";
+      h2.style.transform = "translateY(-20px)";
+      setTimeout(() => h2.remove(), 800);
+    }
+
+    const descCandidates = document.querySelectorAll("div, p, span");
+    descCandidates.forEach((el) => {
+      if (
+        el.textContent.includes("prompt") ||
+        el.className?.includes("left-description-text-53")
+      ) {
+        el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+        el.style.opacity = "0";
+        el.style.transform = "translateY(20px)";
+        setTimeout(() => el.remove(), 800);
+      }
+    });
+  }
+
+  if (lastScrollStep === 74 && scrollStep < 74) {
+    resetOpacityForRightContent();
+    const overlay = document.querySelector(".full-screen-overlay");
+    if (overlay) {
+      overlay.style.opacity = "0";
+      setTimeout(() => overlay.remove(), 1000);
+    }
+
+    removeOldLeftTexts(() => {
+      showLeftTypingText53();
+      showLeftDescriptionText53();
+    });
+
+    isStep53Active = true;
+  }
+
+  if (scrollStep === 75 && lastScrollStep !== 75) {
+    applyStrongerOpacityToRightContent();
+  }
+
+  if (lastScrollStep === 75 && scrollStep < 75) {
+    resetStrongerOpacityForRightContent();
+  }
+
+  if (scrollStep === 76 && lastScrollStep !== 76) {
+    applyStrongerOpacityToRightContent();
+    showBottomBlackBar();
+  }
+
+  if (lastScrollStep === 76 && scrollStep < 76) {
+    hideBottomBlackBar();
+  }
+
+  if (scrollStep === 77 && lastScrollStep !== 77) {
+    const bar = document.querySelector(".bottom-black-bar");
+
+    if (bar) {
+      bar.style.transition = "height 0.8s ease";
+      bar.style.height = "235px";
+
+      if (!bar.querySelector(".powered-text")) {
+        const textContainer = document.createElement("div");
+        textContainer.className = "powered-text";
+        textContainer.style.position = "absolute";
+        textContainer.style.top = "23%";
+        textContainer.style.left = "50%";
+        textContainer.style.transform = "translate(-50%, -50%) scale(0.95)";
+        textContainer.style.opacity = "0";
+        textContainer.style.transition = "opacity 1s ease, transform 1s ease";
+        textContainer.style.textAlign = "center";
+        textContainer.style.fontFamily = "'Helvetica Neue', sans-serif";
+
+        textContainer.innerHTML = `
+        <div style="color: #999; font-size: 32px; margin-bottom: 8px;">Powered by</div>
+  <div style="color: #fff; font-size: 32px;">
+    <strong style="color: white;">Ray2</strong><span style="color: #999;">, our large-scale video model for realistic visuals</span>
+  </div>
+  <div style="color: #fff; font-size: 32px;">
+    <strong style="color: white;">Photon</strong><span style="color: #999;">, our most creative image model</span>
+  </div>
+      `;
+
+        bar.appendChild(textContainer);
+
+        setTimeout(() => {
+          textContainer.style.opacity = "1";
+          textContainer.style.transform = "translate(-50%, -50%) scale(1)";
+        }, 100);
+      }
+    }
+  }
+
+  if (lastScrollStep === 77 && scrollStep < 77) {
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "height 0.8s ease";
+      bar.style.height = "20px";
+
+      const text = bar.querySelector(".powered-text");
+      if (text) {
+        text.style.opacity = "0";
+        text.style.transform = "translate(-50%, -50%) scale(0.95)";
+        setTimeout(() => text.remove(), 800);
+      }
+    }
+  }
+
+  if (scrollStep === 78 && lastScrollStep !== 78) {
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "height 1s ease";
+      bar.style.height = "415px";
+    }
+
+    const text = document.querySelector(".powered-text");
+    if (text) {
+      text.style.transition = "transform 1s ease";
+      text.style.transform = "translate(-50%, 20%) scale(0.95)";
+    }
+  }
+
+  if (lastScrollStep === 78 && scrollStep < 78) {
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "height 1s ease";
+      bar.style.height = "270px";
+    }
+
+    const text = document.querySelector(".powered-text");
+    if (text) {
+      text.style.transition = "transform 1s ease";
+      text.style.transform = "translate(-50%, -60%) scale(0.95)";
+    }
+  }
+
+  if (scrollStep === 79 && lastScrollStep !== 79) {
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "height 1s ease";
+      bar.style.height = "545px";
+    }
+
+    const text = document.querySelector(".powered-text");
+    if (text) {
+      text.style.transition = "transform 1s ease";
+      text.style.transform = "translate(-50%, 60%) scale(0.95)";
+    }
+  }
+
+  if (lastScrollStep === 79 && scrollStep < 79) {
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "height 1s ease";
+      bar.style.height = "415px";
+    }
+
+    const text = document.querySelector(".powered-text");
+    if (text) {
+      text.style.transition = "transform 1s ease";
+      text.style.transform = "translate(-50%, -20%) scale(0.95)";
+    }
+  }
+
+  if (scrollStep === 80 && lastScrollStep !== 80) {
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "height 1s ease";
+      bar.style.height = "630px";
+    }
+
+    const text = document.querySelector(".powered-text");
+    if (text) {
+      text.style.transition = "transform 1s ease";
+      text.style.transform = "translate(-50%, 80%) scale(0.95)";
+    }
+  }
+
+  if (lastScrollStep === 80 && scrollStep < 80) {
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "height 1s ease";
+      bar.style.height = "545px";
+    }
+
+    const text = document.querySelector(".powered-text");
+    if (text) {
+      text.style.transition = "transform 1s ease";
+      text.style.transform = "translate(-50%, 20%) scale(0.95)";
+    }
+  }
+
+  if (scrollStep === 81 && lastScrollStep !== 81) {
+    const header = document.querySelector(".dream-header-container");
+    if (header) {
+      header.style.zIndex = "10002";
+    }
+
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "height 1s ease";
+      bar.style.height = "705px";
+    }
+
+    const text = document.querySelector(".powered-text");
+    if (text) {
+      text.style.transition = "transform 1s ease";
+      text.style.transform = "translate(-50%, 100%) scale(0.95)";
+    }
+
+    const tryNowBtn = document.querySelector(".hd-try");
+    if (tryNowBtn) {
+      tryNowBtn.dataset.originalBg = tryNowBtn.style.backgroundColor || "";
+      tryNowBtn.dataset.originalColor = tryNowBtn.style.color || "";
+
+      tryNowBtn.style.backgroundColor = "white";
+      tryNowBtn.style.color = "black";
+      tryNowBtn.style.border = "1px solid black";
+      tryNowBtn.style.transition = "all 0.4s ease";
+      tryNowBtn.style.zIndex = "10003";
+    }
+
+    const logo = document.querySelector(".invert");
+    if (logo) {
+      logo.classList.add("normal");
+    }
+  }
+
+  if (lastScrollStep === 81 && scrollStep < 81) {
+    const header = document.querySelector(".dream-header-container");
+    if (header) {
+      header.style.zIndex = "";
+    }
+
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "height 1s ease";
+      bar.style.height = "630px";
+    }
+
+    const text = document.querySelector(".powered-text");
+    if (text) {
+      text.style.transition = "transform 1s ease";
+      text.style.transform = "translate(-50%, 80%) scale(0.95)";
+    }
+
+    const tryNowBtn = document.querySelector(".hd-try");
+    if (tryNowBtn) {
+      tryNowBtn.style.backgroundColor = tryNowBtn.dataset.originalBg || "";
+      tryNowBtn.style.color = tryNowBtn.dataset.originalColor || "";
+      tryNowBtn.style.border = "";
+      tryNowBtn.style.zIndex = "";
+    }
+  }
+
+  if (scrollStep === 82 && lastScrollStep !== 82) {
+    const header = document.querySelector(".dream-header-container");
+    if (header) {
+      header.style.zIndex = "10002";
+    }
+
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "all 1s ease";
+      bar.style.height = "800px";
+    }
+
+    const text = document.querySelector(".powered-text");
+    if (text) {
+      text.style.transition = "transform 1s ease";
+      text.style.transform = "translate(-50%, 140%) scale(0.95)";
+    }
+
+    const tryNowBtn = document.querySelector(".hd-try");
+    if (tryNowBtn) {
+      tryNowBtn.style.backgroundColor = "white";
+      tryNowBtn.style.color = "black";
+      tryNowBtn.style.border = "1px solid black";
+      tryNowBtn.style.transition = "all 0.4s ease";
+      tryNowBtn.style.zIndex = "10003";
+    }
+
+    const logo = document.querySelector(".invert");
+    if (logo) {
+      logo.classList.add("normal");
+    }
+  }
+
+  if (lastScrollStep === 82 && scrollStep < 82) {
+    const header = document.querySelector(".dream-header-container");
+    if (header) {
+      header.style.zIndex = "";
+    }
+
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "height 1s ease";
+      bar.style.height = "705px";
+    }
+
+    const text = document.querySelector(".powered-text");
+    if (text) {
+      text.style.transition = "transform 1s ease";
+      text.style.transform = "translate(-50%, 100%) scale(0.95)";
+    }
+
+    const tryNowBtn = document.querySelector(".hd-try");
+    if (tryNowBtn) {
+      tryNowBtn.style.backgroundColor = tryNowBtn.dataset.originalBg || "";
+      tryNowBtn.style.color = tryNowBtn.dataset.originalColor || "";
+      tryNowBtn.style.border = "";
+      tryNowBtn.style.zIndex = "";
+    }
+  }
+
+  if (
+    (scrollStep === 83 && lastScrollStep !== 83) ||
+    (scrollStep === 84 && lastScrollStep !== 84) ||
+    (scrollStep === 85 && lastScrollStep !== 85)
+  ) {
+    const tryNowBtn = document.querySelector(".hd-try");
+    if (tryNowBtn) {
+      tryNowBtn.style.backgroundColor = "white";
+      tryNowBtn.style.color = "black";
+      tryNowBtn.style.border = "1px solid black";
+      tryNowBtn.style.zIndex = "10003";
+      tryNowBtn.style.transition = "all 0.4s ease";
+    }
+
+    const logo = document.querySelector(".invert");
+    if (logo) {
+      logo.classList.add("normal");
+    }
+
+    const bar = document.querySelector(".bottom-black-bar");
+    if (bar) {
+      bar.style.transition = "all 1s ease";
+    }
+  }
+
+  if (scrollStep === 86 && lastScrollStep !== 86) {
+    const textContainer = document.querySelector(".powered-text");
+    if (textContainer) {
+      textContainer.style.transition = "transform 1s ease, opacity 1s ease";
+      textContainer.style.transform = "translate(-50%, 150%) scale(0)";
+      textContainer.style.opacity = "0";
+    }
+  }
+
+  if (scrollStep < 86 && lastScrollStep === 86) {
+    const textContainer = document.querySelector(".powered-text");
+    if (textContainer) {
+      textContainer.style.transition = "transform 1s ease, opacity 1s ease";
+      textContainer.style.transform = "translate(-50%, 150%) scale(1)";
+      textContainer.style.opacity = "1";
+    }
+  }
 
   lastScrollStep = scrollStep;
 }
 
+function showBottomBlackBar() {
+  if (document.querySelector(".bottom-black-bar")) return;
+
+  const bar = document.createElement("div");
+  bar.className = "bottom-black-bar";
+  bar.style.position = "fixed";
+  bar.style.bottom = "-20px";
+  bar.style.left = "0";
+  bar.style.width = "100%";
+  bar.style.height = "20px";
+  bar.style.backgroundColor = "black";
+  bar.style.zIndex = "9999";
+  bar.style.transition = "bottom 0.8s ease";
+
+  document.body.appendChild(bar);
+
+  requestAnimationFrame(() => {
+    bar.style.bottom = "0";
+  });
+}
+
+function hideBottomBlackBar() {
+  const bar = document.querySelector(".bottom-black-bar");
+  if (bar) {
+    bar.style.bottom = "-20px";
+    setTimeout(() => bar.remove(), 500);
+  }
+}
+
+function applyOpacityToRightContent() {
+  const rightImages = document.querySelectorAll(".overlay-faded-image");
+  rightImages.forEach((img) => {
+    img.style.transition = "opacity 0.8s ease";
+    img.style.opacity = "0.3";
+  });
+
+  const circleText = document.querySelector(".video-circle-overlay span");
+  if (circleText) {
+    circleText.style.transition = "opacity 0.8s ease";
+    circleText.style.opacity = "0.3";
+  }
+}
+
+function applyStrongerOpacityToRightContent() {
+  const rightImages = document.querySelectorAll(".overlay-faded-image");
+  rightImages.forEach((img) => {
+    img.style.transition = "opacity 0.8s ease";
+    img.style.opacity = "0.001";
+  });
+
+  const circleText = document.querySelector(".video-circle-overlay span");
+  if (circleText) {
+    circleText.style.transition = "opacity 0.8s ease";
+    circleText.style.opacity = "0.001";
+  }
+}
+
+function resetOpacityForRightContent() {
+  const rightImages = document.querySelectorAll(".overlay-faded-image");
+  rightImages.forEach((img) => {
+    img.style.opacity = "1";
+  });
+
+  const circleText = document.querySelector(".video-circle-overlay span");
+  if (circleText) {
+    circleText.style.opacity = "1";
+  }
+}
+
+function resetStrongerOpacityForRightContent() {
+  const rightImages = document.querySelectorAll(".overlay-faded-image");
+  rightImages.forEach((img) => {
+    img.style.opacity = "0.3";
+  });
+
+  const circleText = document.querySelector(".video-circle-overlay span");
+  if (circleText) {
+    circleText.style.opacity = "0.3";
+  }
+}
+
+function resetOnlyBackgroundImages() {
+  const imgs = document.querySelectorAll("#imageAroundCircleContainer img");
+  imgs.forEach((img) => img.remove());
+}
+
+function updateOverlayImagesOpacity(opacityValue = "1") {
+  const overlayImages = document.querySelectorAll(".overlay-faded-image");
+  overlayImages.forEach((img) => {
+    img.style.opacity = opacityValue;
+  });
+}
+
 const extraTextMap = {
-  "Iceland": ["Greenland", "Norwegian fjords", "Patagonian glaciers", "Tokyo city"],
-  "terrarium": ["sand garden", "hanging planter", "aquaponics setup", "zen sanctuary"],
-  "water": ["chromium space", "ethereal ice cavern", "desert dunes", "vivide coral reef"],
-  "kitchen": ["bedroom", "living room", "bathroom", "outdoor patio"],
-  "raining": ["snowing", "foggy", "stormy", "eclipsing"]
+  Iceland: [
+    "Greenland",
+    "Norwegian fjords",
+    "Patagonian glaciers",
+    "Tokyo city",
+  ],
+  terrarium: [
+    "sand garden",
+    "hanging planter",
+    "aquaponics setup",
+    "zen sanctuary",
+  ],
+  water: [
+    "chromium space",
+    "ethereal ice cavern",
+    "desert dunes",
+    "vivide coral reef",
+  ],
+  kitchen: ["bedroom", "living room", "bathroom", "outdoor patio"],
+  raining: ["snowing", "foggy", "stormy", "eclipsing"],
 };
 
 function showExtraInfoForWord(word) {
@@ -2925,7 +3527,9 @@ function showExtraInfoForWord(word) {
     el.style.borderRadius = "9999px";
     el.style.opacity = "0";
     el.style.transform = "translateY(10px)";
-    el.style.transition = `opacity 0.4s ${index * 0.15}s ease, transform 0.4s ${index * 0.15}s ease`;
+    el.style.transition = `opacity 0.4s ${index * 0.15}s ease, transform 0.4s ${
+      index * 0.15
+    }s ease`;
     container.appendChild(el);
 
     requestAnimationFrame(() => {
@@ -2938,7 +3542,11 @@ function showExtraInfoForWord(word) {
 }
 
 function resetExtraInfo(force = false) {
-  const allExtraContainers = document.querySelectorAll(".extra-info-container, .extra-info-under-word");
+  const is67 = scrollStep === 67;
+
+  const allExtraContainers = document.querySelectorAll(
+    ".extra-info-container, .extra-info-under-word"
+  );
   allExtraContainers.forEach((container) => {
     container.style.opacity = "0";
     container.style.transform = "translateY(10px)";
@@ -2951,7 +3559,7 @@ function resetExtraInfo(force = false) {
     }, 300);
   });
 
-  if (!force && isStep53Active) return;
+  if (!force && isStep53Active && !is67) return;
 
   const circleSpan = document.querySelector(".video-circle-overlay span");
   if (circleSpan) {
@@ -2970,11 +3578,15 @@ const promptHighlightWords = {
   "#3939dd": ["flowers", "terrarium"],
   "#ffffff": ["model", "water"],
   "#ffa500": ["view", "kitchen"],
-  "#f04b4b": ["desert", "raining"]
+  "#f04b4b": ["desert", "raining"],
 };
 
-function highlightPromptWordsInCircle(bgColor, disableExtra = false) {
-  resetExtraInfo(true); 
+function highlightPromptWordsInCircle(
+  bgColor,
+  disableExtra = false,
+  replaceLast = false
+) {
+  resetExtraInfo(true);
 
   const circle = document.querySelector(".video-circle-overlay");
   if (!circle) return;
@@ -2990,6 +3602,8 @@ function highlightPromptWordsInCircle(bgColor, disableExtra = false) {
 
   span.innerHTML = "";
 
+  const wordSpans = [];
+
   words.forEach((word, index) => {
     const wordSpan = document.createElement("span");
     wordSpan.textContent = word;
@@ -3000,6 +3614,9 @@ function highlightPromptWordsInCircle(bgColor, disableExtra = false) {
       wordSpan.style.borderRadius = "9999px";
       wordSpan.style.padding = "1px";
       wordSpan.style.verticalAlign = "middle";
+      wordSpan.dataset.highlighted = "true";
+
+      wordSpans.push(wordSpan);
     }
 
     span.appendChild(wordSpan);
@@ -3007,6 +3624,18 @@ function highlightPromptWordsInCircle(bgColor, disableExtra = false) {
       span.appendChild(document.createTextNode(" "));
     }
   });
+
+  if (disableExtra && replaceLast) {
+    const lastWord = wordSpans[wordSpans.length - 1];
+    if (lastWord) {
+      const originalWord = lastWord.textContent.trim();
+      const newTexts = extraTextMap[originalWord];
+      if (newTexts && newTexts.length > 0) {
+        lastWord.textContent = newTexts[0];
+      }
+    }
+    return;
+  }
 
   if (disableExtra) return;
 
