@@ -2370,41 +2370,59 @@ function showOverlayImages(bgColor, is67 = false) {
     .querySelectorAll(".overlay-faded-image")
     .forEach((img) => img.remove());
 
-  images.forEach((src, index) => {
+  let index = 0;
+
+  function renderNextImage() {
+    if (index >= images.length) return;
+
+    const src = images[index];
     const img = document.createElement("img");
     img.src = src;
     img.className = "overlay-faded-image";
     img.style.position = "absolute";
-    img.style.opacity = is67 ? "0.25" : "1";
+    img.style.opacity = "0";
     img.style.zIndex = is67 ? "1" : "2";
-    img.style.transition = "opacity 0.6s ease";
+    img.style.transition = "opacity 0.8s ease";
+    img.style.willChange = "opacity, transform";
 
     if (index === 0) {
-      img.style.top = "165px";
-      img.style.left = "888px";
-      img.style.width = "150px";
-      img.style.height = "220px";
-      img.style.borderRadius = "20px";
+      Object.assign(img.style, {
+        top: "165px",
+        left: "888px",
+        width: "150px",
+        height: "220px",
+        borderRadius: "20px",
+      });
     } else if (index === 1) {
-      img.style.top = "165px";
-      img.style.left = "1048px";
-      img.style.width = "200px";
-      img.style.height = "220px";
-      img.style.borderRadius = "20px";
+      Object.assign(img.style, {
+        top: "165px",
+        left: "1048px",
+        width: "200px",
+        height: "220px",
+        borderRadius: "20px",
+      });
     } else if (index === 2) {
-      img.style.top = "484px";
-      img.style.left = "888px";
-      img.style.width = "360px";
-      img.style.height = "180px";
-      img.style.borderRadius = "25px";
+      Object.assign(img.style, {
+        top: "484px",
+        left: "888px",
+        width: "360px",
+        height: "180px",
+        borderRadius: "25px",
+      });
     }
 
-    img.style.opacity = "0.60";
-    img.style.zIndex = "1";
-    img.style.transition = "opacity 0.8s ease";
-
     document.body.appendChild(img);
-  });
+
+    index++;
+
+    requestAnimationFrame(() => {
+      img.style.opacity = is67 ? "0.25" : "0.6";
+
+      requestAnimationFrame(renderNextImage);
+    });
+  }
+
+  requestAnimationFrame(renderNextImage);
 }
 
 function resetOverlayImages() {
@@ -3458,12 +3476,12 @@ function handleScrollStep(scrollStep) {
         left: "50%",
         transform: "translate(-50%, -50%)",
         width: "100vw",
-        height: "250px",
+        minHeight: "350px",
         overflowX: "auto",
-        overflowY: "hidden",
+        overflowY: "visible",
         whiteSpace: "nowrap",
         zIndex: "10002",
-        padding: "20px 0",
+        padding: "120px 0",
         boxSizing: "border-box",
         cursor: "grab",
       });
@@ -3476,6 +3494,8 @@ function handleScrollStep(scrollStep) {
         paddingLeft: "50vw",
         paddingRight: "50vw",
         alignItems: "center",
+        overflow: "visible",
+        position: "relative",
       });
 
       const DMVideosAndPhotos = [
@@ -3496,29 +3516,40 @@ function handleScrollStep(scrollStep) {
       const mediaWidth = 300;
       const mediaHeight = 160;
 
-      DMVideosAndPhotos.forEach((src) => {
+      DMVideosAndPhotos.forEach((src, index) => {
         const isVideo = src.endsWith(".mp4");
         const media = isVideo
           ? document.createElement("video")
           : document.createElement("img");
 
         media.src = src;
+        media.muted = true;
+        media.autoplay = true;
+        media.loop = true;
+        media.playsInline = true;
+
         Object.assign(media.style, {
-          width: `${mediaWidth}px`,
-          height: `${mediaHeight}px`,
           objectFit: "cover",
           borderRadius: "12px",
           flexShrink: "0",
           transition: "all 0.3s ease",
           userSelect: "none",
           pointerEvents: "none",
+          position: "relative",
         });
 
-        if (isVideo) {
-          media.muted = true;
-          media.autoplay = true;
-          media.loop = true;
-          media.playsInline = true;
+        if (index === 0) {
+          media.style.width = "320px";
+          media.style.height = "180px";
+        } else if (index === 1) {
+          media.style.width = "300px";
+          media.style.height = "160px";
+        } else if (index === 6) {
+          media.style.width = "360px";
+          media.style.height = "200px";
+        } else {
+          media.style.width = "280px";
+          media.style.height = "160px";
         }
 
         container.appendChild(media);
@@ -3769,25 +3800,50 @@ function handleScrollStep(scrollStep) {
       function scaleMediaOnCenter(wrapper, container) {
         const medias = container.querySelectorAll("video, img");
 
-        wrapper.addEventListener("scroll", () => {
+        let ticking = false;
+
+        const animate = () => {
           const wrapperCenter = wrapper.scrollLeft + wrapper.clientWidth / 2;
 
           medias.forEach((media) => {
             const rect = media.getBoundingClientRect();
-            const mediaCenter = rect.left + rect.width / 2;
-            const distanceToCenter = Math.abs(
-              mediaCenter - window.innerWidth / 2
-            );
+            const mediaCenterX = rect.left + rect.width / 2;
+            const distanceToCenter = mediaCenterX - window.innerWidth / 2;
 
-            if (distanceToCenter < 100) {
-              media.style.transform = "scale(1.1)";
+            media.style.transition =
+              "transform 0.5s ease, margin-top 0.5s ease, opacity 0.5s ease";
+
+            media.style.position = "relative";
+
+            if (Math.abs(distanceToCenter) < 100) {
+              media.style.transform = "scale(1.5)";
+              media.style.marginTop = "0";
               media.style.zIndex = "2";
+              media.style.opacity = "1";
+            } else if (distanceToCenter < 0) {
+              media.style.transform = "scale(1)";
+              media.style.marginTop = "-170px";
+              media.style.zIndex = "1";
+              media.style.opacity = "0.85";
             } else {
               media.style.transform = "scale(1)";
+              media.style.marginTop = "0";
               media.style.zIndex = "1";
+              media.style.opacity = "0.9";
             }
           });
+
+          ticking = false;
+        };
+
+        wrapper.addEventListener("scroll", () => {
+          if (!ticking) {
+            window.requestAnimationFrame(animate);
+            ticking = true;
+          }
         });
+
+        animate();
       }
     }
   }
@@ -5167,18 +5223,12 @@ function resetSeventhVideoFrom20() {
 
 function scaleEighthVideoExtra20() {
   const container = document.getElementById("eightVideoContainer");
+  if (!container) return;
 
-  if (!container) {
-    console.warn("eightVideoContainer topilmadi");
-    return;
-  }
-
-  container.style.display = "block";
-
-  container.getBoundingClientRect();
+  container.style.pointerEvents = "auto";
 
   requestAnimationFrame(() => {
-    container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
+    container.style.transition = "transform 0.7s ease, opacity 0.7s ease";
     container.style.transform = "translate(-90%, -60%) scale(1.2)";
     container.style.opacity = "0.3";
   });
@@ -5188,9 +5238,12 @@ function resetEighthVideoFrom20() {
   const container = document.getElementById("eightVideoContainer");
   if (!container) return;
 
-  container.style.transition = "transform 0.9s ease, opacity 0.9s ease";
-  container.style.transform = "translate(10%, -50%) scale(0.3)";
-  container.style.opacity = "0";
+  requestAnimationFrame(() => {
+    container.style.transition = "transform 0.7s ease, opacity 0.7s ease";
+    container.style.transform = "translate(10%, -50%) scale(0.3)";
+    container.style.opacity = "0";
+    container.style.pointerEvents = "none";
+  });
 }
 
 function updateEighthBackgroundVideoSrcOnly(src) {
@@ -5719,7 +5772,7 @@ function scale3456VideosIn17Scroll() {
       id: "fourthVideoContainer",
       scale: 3,
       translateX: "-265%",
-      translateY: "-150%",
+      translateY: "-130%",
       opacity: 1,
     },
   ];
@@ -5786,7 +5839,7 @@ function scaleSixthVideoExtra7() {
 
   container.getBoundingClientRect();
 
-  container.style.transform = "translate(-350%, 130%) scale(1.5)";
+  container.style.transform = "translate(-350%, 160%) scale(1.5)";
   container.style.opacity = "0.7";
 }
 
